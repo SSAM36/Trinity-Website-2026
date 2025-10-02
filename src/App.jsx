@@ -11,6 +11,7 @@ import Gallery from './pages/Gallery'
 import Events from './pages/Events'
 import EventCategoryPage from './pages/EventsCategoryPage'
 import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 import './App.css'
 import siteBg from './images/website bg for all pages.png'
 
@@ -35,6 +36,7 @@ const App = () => {
         <Navbar />
         <main className="flex-1 pt-16 md:pt-16 lg:pt-20">
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/registrations" element={<Registration />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
@@ -52,5 +54,4 @@ const App = () => {
   )
 }
 
-export default App
-
+export default App;

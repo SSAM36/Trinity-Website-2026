@@ -30,7 +30,7 @@ const Events = () => {
               style={{
                 fontFamily: "Circe Contrast",
                 fontSize: "43.5px",
-                color: "#f3cf9b",
+                color: "#2d1e12",
               }}
             >
               {category} Events
@@ -40,7 +40,7 @@ const Events = () => {
               style={{
                 fontFamily: "Circe Contrast",
                 fontSize: "16.1px",
-                color: "#f3cf9b",
+                color: "#2d1e12",
               }}
             >
               {category === "Cultural" && "Dance, Drama, Music & More"}

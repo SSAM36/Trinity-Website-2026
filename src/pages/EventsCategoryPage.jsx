@@ -31,7 +31,7 @@ const EventCategoryPage = () => {
         <h2 className="text-4xl font-bold text-center text-[#f3cf9b] mb-8 mt-12">
           {category} Events
         </h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 text-[#2d1e12]">
           {events.map((event, idx) => (
             <EventCard key={idx} event={event} />
           ))}
