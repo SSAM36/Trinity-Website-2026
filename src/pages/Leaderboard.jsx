@@ -8,12 +8,12 @@ function Leaderboard() {
   const [loading, setLoading] = useState(true);
 
   const teamDefs = [
-    { name: "Devadatta", color: "text-sky-200", icon: <FaStar className="text-sky-200 text-2xl sm:text-3xl md:text-4xl" /> },
-    { name: "Vasuki", color: "text-green-400", icon: <GiSnake className="text-green-500 text-2xl sm:text-3xl md:text-4xl" /> },
-    { name: "Mayura", color: "text-sky-400", icon: <FaFeatherAlt className="text-blue-400 text-2xl sm:text-3xl md:text-4xl" /> },
-    { name: "Airavata", color: "text-gray-200", icon: <FaHorse className="text-gray-100 text-2xl sm:text-3xl md:text-4xl" /> },
-    { name: "Garuda", color: "text-yellow-400", icon: <GiEagleHead className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl" /> },
-    { name: "Simha", color: "text-orange-500", icon: <GiLion className="text-orange-500 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Devadatta", color: "text-sky-200", icon: <FaStar className="text-sky-200 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Vasuki", color: "text-green-400", icon: <GiSnake className="text-green-500 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Mayura", color: "text-sky-400", icon: <FaFeatherAlt className="text-blue-400 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Airavata", color: "text-gray-200", icon: <FaHorse className="text-gray-100 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Garuda", color: "text-yellow-400", icon: <GiEagleHead className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl" /> },
+    // { name: "Simha", color: "text-orange-500", icon: <GiLion className="text-orange-500 text-2xl sm:text-3xl md:text-4xl" /> },
   ];
 
   useEffect(() => {

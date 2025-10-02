@@ -27,7 +27,7 @@ export default function Sponsor() {
         {/* Header Section */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 mb-2 tracking-wider"
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#2d1e12] mb-2 tracking-wider"
             style={{
               fontFamily:
                 '"Copperplate Gothic", "Copperplate", "Trajan Pro", "Times New Roman", serif',
@@ -37,7 +37,7 @@ export default function Sponsor() {
             OUR
           </h1>
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 mb-6 md:mb-8 tracking-wider"
+            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#2d1e12] mb-6 md:mb-8 tracking-wider"
             style={{
               fontFamily:
                 '"Copperplate Gothic", "Copperplate", "Trajan Pro", "Times New Roman", serif',
@@ -47,7 +47,7 @@ export default function Sponsor() {
             SPONSORS
           </h1>
           <p
-            className="text-lg md:text-xl lg:text-2xl text-gray-800 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl lg:text-2xl text-black max-w-3xl mx-auto leading-relaxed"
             style={{
               fontFamily:
                 '"Copper BT", "Copperplate", "Georgia", "Times New Roman", serif',
