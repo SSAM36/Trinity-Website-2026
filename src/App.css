@@ -1,0 +1,74 @@
+/* Global reset for seamless background */
+@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: transparent;
+}
+
+/* Global typography
+   - Headings/titles -> Reggae One
+   - Normal text -> serif
+   Do not change font sizes; only font-family is set. */
+html, body {
+  font-family: lancelot !important;
+}
+h1, h2, h3, h4, h5, h6,
+.heading, .title {
+  font-family: 'Reggae One', cursive !important;
+}
+/* Common text containers should inherit serif */
+p, span, li, a, button, input, textarea, label, small, strong, em, div {
+  font-family: inherit !important;
+}
+
+/* Infinite horizontal scroll for MediaCarousel */
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.animate-infinite-scroll {
+  animation: infinite-scroll 400s linear infinite;
+  will-change: transform;
+}
+
+/* Pause the inner animated track when hovering the outer container */
+.pause-on-hover:hover .animate-infinite-scroll {
+  animation-play-state: paused;
+}
+
+/* Pause when a parent toggles 'paused' class (e.g., while dragging) */
+.paused .animate-infinite-scroll {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbars for a cleaner look while keeping scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Better momentum scrolling on touch devices */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-infinite-scroll {
+    animation: none;
+  }
+}
+
