@@ -38,8 +38,8 @@ const Navbar = () => {
       <header
         className={`hidden md:flex fixed top-0 left-0 w-full z-50 items-center justify-between transition-all duration-300 px-10 ${
           scrolled
-            ? "bg-[#0b1a3b]/30 py-3 backdrop-blur-md"
-            : "bg-transparent py-6"
+            ? "bg-[#0b1a3b]/40 py-2.5 backdrop-blur-md border-b border-white/10"
+            : "bg-gradient-to-b from-[#0b1a3b]/30 to-transparent py-4 border-b border-transparent"
         }`}
         style={{
           fontFamily: "'Reggae One', cursive",
@@ -48,7 +48,7 @@ const Navbar = () => {
         {/* Desktop layout: left links, centered logo, right links using 3-column grid to avoid overlap */}
         <div className="w-full grid grid-cols-3 items-center">
           {/* Left group (4) */}
-          <nav className="flex space-x-8 items-center justify-start">
+          <nav className="flex space-x-8 items-center justify-start relative z-10">
             {leftLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -66,14 +66,14 @@ const Navbar = () => {
           </nav>
 
           {/* Center logo */}
-          <div className="flex items-center justify-center">
-            <Link to="/" className="flex items-center space-x-2">
+          <div className="flex items-center justify-center pointer-events-none">
+            <Link to="/" className="flex items-center space-x-2 pointer-events-auto">
               <img src={logo} alt="Trinity Logo" className="h-12 w-auto" />
             </Link>
           </div>
 
           {/* Right group (3) */}
-          <nav className="flex space-x-8 items-center justify-end">
+          <nav className="flex space-x-8 items-center justify-end relative z-10">
             {rightLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -94,29 +94,36 @@ const Navbar = () => {
 
       {/* Mobile Navbar */}
       <div className="md:hidden" style={{ fontFamily: "'Reggae One', cursive" }}>
-        {/* Hamburger Button */}
-        <button
-          className="fixed top-4 right-4 z-50 p-3 rounded-full bg-[#0b1a3b]/90 shadow-lg backdrop-blur-sm"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-          style={{ color: linkColor, border: `1px solid ${linkColor}` }}
-        >
-          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile Top Bar: Centered Logo + Right Hamburger */}
+        <div className="fixed top-0 left-0 w-full h-14 z-60 flex items-center justify-center bg-transparent backdrop-blur-sm border-b border-white/10">
+          <Link to="/" className="pointer-events-auto">
+            <img src={logo} alt="Trinity Logo" className="h-10 w-auto" />
+          </Link>
+          {/* Hamburger Button (right) */}
+          <button
+            className="absolute right-4 p-2.5 rounded-full shadow-[0_0_20px_rgba(219,171,106,0.25)] ring-1 ring-[#dbab6a]/50 bg-black/20 backdrop-blur-md hover:ring-[#dbab6a] hover:shadow-[0_0_28px_rgba(219,171,106,0.45)] transition-all duration-200"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            style={{ color: linkColor }}
+          >
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
 
         {/* Mobile Menu Overlay */}
         <div
-          className={`fixed inset-0 backdrop-blur-md flex flex-col items-center z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
+          className={`fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
             isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
           }`}
           style={{
-            backgroundColor: "rgba(11, 26, 59, 0.9)",
+            background: "radial-gradient(1200px 600px at 50% -10%, rgba(219,171,106,0.20), rgba(11,26,59,0.92) 35%, rgba(6,12,28,0.98) 100%)",
+            backdropFilter: "blur(8px)",
           }}
         >
           {/* ✅ Logo at top of mobile menu */}
-          <div className="mt-10 mb-8">
+          <div className="mt-20 mb-6">
             <Link to="/" onClick={() => setIsMenuOpen(false)}>
-              <img src={logo} alt="Trinity Logo" className="h-16 w-auto" />
+              <img src={logo} alt="Trinity Logo" className="h-16 w-auto drop-shadow-[0_8px_24px_rgba(219,171,106,0.35)]" />
             </Link>
           </div>
 
@@ -127,15 +134,12 @@ const Navbar = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  className="w-full text-center px-6 py-3 rounded-lg font-semibold transition-all duration-200"
+                  className="w-full text-center px-6 py-3 rounded-md font-semibold transition-all duration-200 border border-[#8C6A3E]/60 bg-[rgba(20,14,9,0.55)] hover:bg-[rgba(26,15,8,0.75)] shadow-[0_6px_18px_rgba(0,0,0,0.35)]"
                   style={({ isActive }) => ({
                     color: linkColor,
-                    backgroundColor: isActive
-                      ? "rgba(243, 207, 155, 0.2)"
-                      : "transparent",
-                    border: isActive
-                      ? "1px solid rgba(243,207,155,0.3)"
-                      : "1px solid transparent",
+                    boxShadow: isActive ? "0 0 18px rgba(219,171,106,0.35)" : "0 6px 18px rgba(0,0,0,0.35)",
+                    borderColor: isActive ? "rgba(219,171,106,0.9)" : "rgba(140,106,62,0.6)",
+                    background: isActive ? "linear-gradient(180deg, rgba(30,20,12,0.85), rgba(20,13,8,0.85))" : "rgba(20,14,9,0.55)",
                   })}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -143,6 +147,10 @@ const Navbar = () => {
                 </NavLink>
               ))}
             </div>
+
+            {/* Decorative bottom ridge */}
+            <div className="w-full max-w-sm mt-8 h-[1px] bg-gradient-to-r from-transparent via-[#dbab6a] to-transparent opacity-60" />
+            <div className="mt-3 text-xs tracking-widest text-[#dbab6a]/70" style={{fontFamily: "'Fondamento', serif"}}>TRINITY • 2026</div>
           </div>
         </div>
       </div>

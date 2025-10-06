@@ -3,6 +3,7 @@ import templeBg from "../images/temple_bg_2.png";
 import trinityFest from "../images/trinityfest2.png";
 import submitBg from "../images/submit bg.png";
 import submitBtn from "../images/submitbtn.png";
+import websiteBg from "../images/website bg for all pages.png";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -75,7 +76,10 @@ const RegistrationForm = () => {
     "focus:outline-none focus:ring-2 focus:ring-[#a9742a]";
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col md:flex-row items-center overflow-x-hidden py-16 sm:py-2 bg-black">
+    <div
+      className="relative min-h-screen w-full flex flex-col md:flex-row items-center overflow-x-hidden py-16 sm:py-2 bg-cover bg-center bg-no-repeat bg-fixed"
+      style={{ backgroundImage: `url(${websiteBg})` }}
+    >
       {/* Background Temple Image */}
 
       {/* Right fade gradient */}

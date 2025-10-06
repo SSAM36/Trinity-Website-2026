@@ -47,7 +47,7 @@ const Gallery = () => {
         </div>
       ) : (
         // DomeGallery
-        <div className="relative z-10 w-full flex justify-center items-start pt-24 sm:pt-2">
+        <div className="relative z-10 w-full flex justify-center items-start pt-0 sm:pt-2">
           <div className="w-full h-[90vh] max-h-[1200px] flex justify-center items-start">
             <DomeGallery
               images={SHORTLISTED_IMAGES}

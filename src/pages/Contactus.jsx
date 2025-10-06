@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { MapPin, Phone, Mail, User } from "lucide-react";
-import bg from "../images/backgroundImage.png";
+import websiteBg from "../images/website bg for all pages.png";
 
 const SpotlightCard = ({
   children,
@@ -40,7 +40,7 @@ const SpotlightCard = ({
 
 const Contact = () => {
   useEffect(() => {
-    document.title = "Contact Us - express";
+    document.title = "Contact Us - Trinity";
   }, []);
 
   const contacts = [
@@ -62,15 +62,14 @@ const Contact = () => {
 
   return (
     <div
-      className="relative min-h-screen text-white bg-cover bg-center font-body"
+      className="relative min-h-screen text-white bg-cover bg-center bg-no-repeat bg-fixed font-body"
       style={{
-        backgroundImage: `url(${bg})`,
+        backgroundImage: `url(${websiteBg})`,
       }}
     >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/70"></div>
+      {/* Removed dark overlay to reveal background */}
 
-      <div className="relative z-10 px-6 py-16 lg:py-24 max-w-7xl mx-auto">
+      <div className="relative z-10 px-6 pt-0 pb-16 md:pt-02 md:pb-02 lg:pt-28 lg:pb-24 max-w-7xl mx-auto">
         <div className="text-center text-foreground mt-8">
           {/* Your other page content */}
         </div>

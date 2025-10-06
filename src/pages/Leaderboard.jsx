@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import websiteBg from "../images/website bg for all pages.png";
 import { GiSnake, GiEagleHead, GiLion } from "react-icons/gi";
 import { FaFeatherAlt, FaHorse, FaStar } from "react-icons/fa";
+import CountdownTimer from "../components/common/CountdownTimer";
 
 function Leaderboard() {
   const [houses, setHouses] = useState([]);
@@ -74,6 +75,8 @@ function Leaderboard() {
         LEADERBOARD
       </h1>
 
+      {/* Temporarily replacing the leaderboard standings with the countdown timer. */}
+      {/*
       <div className="w-full max-w-5xl mx-auto flex flex-col gap-3 px-4 sm:px-6">
         {loading ? (
           <p className="text-center text-gray-300 py-10">Loading...</p>
@@ -97,6 +100,21 @@ function Leaderboard() {
             </div>
           ))
         )}
+      </div>
+      */}
+
+      {/* Countdown section in place of leaderboard */}
+      <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-4 sm:px-6 py-8">
+        {/* Coming Soon Text - mirrored from ArchwaySection */}
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-cinzel font-bold drop-shadow-2xl tracking-wide text-center mb-3">
+          <div className="mb-1 text-amber-600" style={{ color: '#E0C98F' }}>
+            COMING
+          </div>
+          <div className="text-red-600 drop-shadow-lg">
+            SOON
+          </div>
+        </h1>
+        <CountdownTimer showContent={true} />
       </div>
     </div>
   );

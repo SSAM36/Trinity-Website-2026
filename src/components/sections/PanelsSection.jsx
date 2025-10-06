@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import deptBg from '../../images/dept description bg.png';
 import hmpgbg from '../../images/hmpgbg.png';
 
-const PanelsSection = () => {
+const PanelsSection = ({ compact = false }) => {
   const [hoveredPanel, setHoveredPanel] = useState(null);
   
   const panelData = [
@@ -72,13 +72,13 @@ const PanelsSection = () => {
         </div>
       </div>
       {/* About Us Section - Separate from background */}
-      <section className="w-full py-16 px-4 ">
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
+      <section className={`w-full ${compact ? 'py-4 px-3' : 'py-16 px-4'}`}>
+        <div className={`${compact ? 'max-w-none w-full' : 'max-w-4xl'} mx-auto flex flex-col items-center`}>
           {/* Plaque heading */}
-          <div className="relative mb-6">
-            <div className="px-8 py-3 rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
+          <div className={`relative ${compact ? 'mb-3' : 'mb-6'}`}>
+            <div className={`${compact ? 'px-5 py-2' : 'px-8 py-3'} rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}>
               <h2
-                className="text-[28px] md:text-[32px] leading-none text-[#E7B565]"
+                className={`${compact ? 'text-[20px]' : 'text-[28px]'} md:text-[32px] leading-none text-[#E7B565]`}
                 style={{ fontFamily: "'Reggae One', cursive" }}
               >
                 About Us
@@ -87,11 +87,11 @@ const PanelsSection = () => {
           </div>
 
           {/* Parchment card */}
-          <div className="relative sm:w-[70%] w-[100%] px-4">
+          <div className={`relative ${compact ? 'w-full px-3' : 'sm:w-[70%] w-[100%] px-4'}`}>
             {/* subtle inner vignette */}
             <div className="absolute inset-0 rounded-[28px]  pointer-events-none" />
             <div
-              className="relative rounded-[58px] p-8 md:p-10 overflow-hidden border-2 border-[#B98F5C]"
+              className={`relative ${compact ? 'rounded-2xl p-4' : 'rounded-[58px] p-8 md:p-10'} overflow-hidden border-2 border-[#B98F5C]`}
               style={{
                 backgroundImage: `url(${hmpgbg})`,
                 backgroundSize: 'cover',
@@ -103,7 +103,7 @@ const PanelsSection = () => {
               <div className="absolute inset-0 bg-[#D4A574]/80" />
               {/* decorative parchment pattern */}
               <div
-                className="absolute inset-0 rounded-[36px] pointer-events-none"
+                className={`absolute inset-0 ${compact ? 'rounded-xl' : 'rounded-[36px]'} pointer-events-none`}
                 style={{
                   backgroundImage: `url(${hmpgbg})`,
                   backgroundSize: 'cover',
@@ -112,7 +112,7 @@ const PanelsSection = () => {
                 }}
               />
               <p
-                className="relative z-10 text-[#2D1810] text-[18px] md:text-[22px] text-center"
+                className={`relative z-10 text-[#2D1810] ${compact ? 'text-[14px]' : 'text-[18px]'} md:text-[22px] text-center`}
                 style={{ fontFamily: 'serif' }}
               >
                 {aboutUsContent}

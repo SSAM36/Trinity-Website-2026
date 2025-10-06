@@ -19,7 +19,7 @@ const EventCategoryPage = () => {
   return (
     <>
       
-      <section className="py-16 px-6 md:px-20"
+      <section className="relative z-0 pt-16 md:pt-0 pb-16 px-4 md:px-20"
         style={{
           backgroundImage: `url(${websiteBg})`,
           backgroundSize: "cover",
@@ -28,7 +28,7 @@ const EventCategoryPage = () => {
         }}
       >
 
-        <h2 className="text-4xl font-bold text-center text-[#f3cf9b] mb-8 mt-12">
+        <h2 className="text-4xl font-bold text-center text-[#f3cf9f] mb-8 mt-4 md:mt-12">
           {category} Events
         </h2>
         <div className="grid md:grid-cols-3 gap-8 text-[#2d1e12]">

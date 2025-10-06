@@ -12,7 +12,9 @@ const Home = () => {
       <Anoucenment />
       {/* Inserted leader message section between temple and panels */}
       <LeaderMessageSection />
-      <PanelsSection />
+      <div className="hidden sm:block">
+        <PanelsSection />
+      </div>
     </div>
   );
 };

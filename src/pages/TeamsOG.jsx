@@ -311,15 +311,14 @@ const TeamsOG = () => {
   return (
     <div className="relative w-full" style={{ height: `${sceneHeight}px` }}>
       <div
-        className="sticky top-0 left-0 w-full h-screen flex items-center justify-center p-1 md:p-2 bg-cover bg-center bg-no-repeat z-40"
+        className="sticky top-0 left-0 w-full h-screen flex items-center justify-center p-1 md:p-2 bg-cover bg-center bg-no-repeat z-10"
         style={{ backgroundImage: "url('../images/website bg for all pages.png')" }}
       >
       <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
       {/* 🔹 Horizontal Navbar */}
       <div
-        className="absolute left-0 w-full z-50 overflow-x-auto"
-        style={{ top: 0 }}
+        className="absolute left-0 w-full z-20 overflow-x-auto top-16 sm:top-0"
       >
         <div
           className="flex justify-center overflow-x-auto px-6 py-3 gap-6 
@@ -372,31 +371,31 @@ const TeamsOG = () => {
             </h2>
 
             {/* 🔹 Scrollable Row */}
-            <div
-              className={`flex flex-row gap-6 overflow-x-auto px-4 lg:justify-center
+          <div
+            className={`flex flex-row gap-6 px-4 lg:justify-center
+    ${dept.images.array.length === 1 ? "justify-center overflow-x-hidden" : "overflow-x-auto"}
     ${dept.images.array.length > 2 ? "md:justify-start" : "md:justify-center"}`}
-              style={{ maxHeight: "60vh" }}
-            >
-              {dept.images.array.map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt="Photo"
-                  className={`flex-shrink-0 object-contain 
-                      w-44 h-68 sm:w-56 sm:h-60 md:w-64 md:h-64 
-                      lg:w-72 lg:h-72 xl:w-80 xl:h-80
-                      rounded-lg transform transition duration-700 ease-in-out
-                      hover:scale-${dept.images.scale} hover:shadow-2xl hover:-translate-y-2 
-                      hover:brightness-110 hover:contrast-110`}
-                />
-              ))}
-            </div>
+            style={{ maxHeight: "60vh" }}
+          >
+            {dept.images.array.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt="Photo"
+                className={`flex-shrink-0 object-contain 
+                    w-44 h-68 sm:w-56 sm:h-60 md:w-64 md:h-64 
+                    lg:w-72 lg:h-72 xl:w-80 xl:h-80
+                    rounded-lg transform transition duration-700 ease-in-out
+                    hover:scale-${dept.images.scale} hover:shadow-2xl hover:-translate-y-2 
+                    hover:brightness-110 hover:contrast-110 ${dept.images.array.length === 1 ? "mx-auto block" : ""}`}
+              />
+            ))}
+          </div>
           </div>
         ))}
       </div>
       {/* close sticky viewport */}
       </div>
-      {/* spacer so footer only appears after the entire sticky scene */}
       <div className="h-[100vh]" aria-hidden></div>
     </div>
   );
