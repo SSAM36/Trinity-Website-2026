@@ -47,7 +47,7 @@ const sponsors = [
   { id: 21, name: "Yocket", url: yocket },
 ];
 
-export default function Sponsor() {
+export default function Sponsor(compact = false) {
   return (
     <div
       className="min-h-screen bg-cover bg-center w-full bg-no-repeat flex items-center justify-center p-10 md:px-20"
@@ -59,26 +59,27 @@ export default function Sponsor() {
       >
         {/* Header Section */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
-          <h1
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#2d1e12] mb-2 tracking-wider"
-            style={{
-              fontFamily:
-                '"Copperplate Gothic", "Copperplate", "Trajan Pro", "Times New Roman", serif',
-              letterSpacing: "0.1em",
-            }}
+          {/* ===== Title Section ===== */}
+          <div
+            className={`relative flex justify-center ${
+              compact ? "mb-3" : "mb-6"
+            }`}
           >
-            OUR
-          </h1>
-          <h1
-            className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#2d1e12] mb-6 md:mb-8 tracking-wider"
-            style={{
-              fontFamily:
-                '"Copperplate Gothic", "Copperplate", "Trajan Pro", "Times New Roman", serif',
-              letterSpacing: "0.1em",
-            }}
-          >
-            SPONSORS
-          </h1>
+            <div
+              className={`inline-block text-center ${
+                compact ? "px-5 py-2" : "px-8 py-3"
+              } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+            >
+              <h2
+                className={`${
+                  compact ? "text-[22px]" : "text-[32px]"
+                } md:text-[52px] leading-none text-[#E7B565]`}
+                style={{ fontFamily: "'Reggae One', cursive" }}
+              >
+                OUR SPONSORS
+              </h2>
+            </div>
+          </div>
           <p
             className="text-lg md:text-xl lg:text-2xl text-black max-w-3xl mx-auto leading-relaxed"
             style={{

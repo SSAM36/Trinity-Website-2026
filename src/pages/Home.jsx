@@ -8,16 +8,14 @@ import HeroSection from "../components/HeroSection";
 const Home = () => {
   return (
     <div className="min-h-screen">
-        <HeroSection />
+      <HeroSection />
       <VideoSection />
-    
+
       <ArchwaySection />
       <Anoucenment />
       {/* Inserted leader message section between temple and panels */}
       <LeaderMessageSection />
-      <div className="hidden sm:block">
-        <PanelsSection />
-      </div>
+      <PanelsSection />
     </div>
   );
 };

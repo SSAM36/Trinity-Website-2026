@@ -4,7 +4,7 @@ import { GiSnake, GiEagleHead, GiLion } from "react-icons/gi";
 import { FaFeatherAlt, FaHorse, FaStar } from "react-icons/fa";
 import CountdownTimer from "../components/common/CountdownTimer";
 
-function Leaderboard() {
+function Leaderboard(compact = false) {
   const [houses, setHouses] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -71,9 +71,27 @@ function Leaderboard() {
       className="min-h-screen w-full bg-black bg-cover bg-center flex flex-col py-2 sm:py-0"
       style={{ backgroundImage: `url(${websiteBg})` }}
     >
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center tracking-widest font-[Cinzel_Decorative] bg-gradient-to-b from-[#FFD875] via-[#E6A93E] to-[#8C5A28] text-transparent bg-clip-text drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] mb-8 mt-8">
-        LEADERBOARD
-      </h1>
+       {/* ===== Title Section ===== */}
+          <div
+            className={`relative flex justify-center ${
+              compact ? "my-3" : "my-6"
+            }`}
+          >
+            <div
+              className={`inline-block text-center ${
+                compact ? "px-5 py-2" : "px-8 py-3"
+              } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+            >
+              <h2
+                className={`${
+                  compact ? "text-[22px]" : "text-[32px]"
+                } md:text-[52px] leading-none text-[#E7B565]`}
+                style={{ fontFamily: "'Reggae One', cursive" }}
+              >
+                LEADERBOARD
+              </h2>
+            </div>
+          </div>
 
       {/* Temporarily replacing the leaderboard standings with the countdown timer. */}
       {/*

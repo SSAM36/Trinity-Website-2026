@@ -31,11 +31,11 @@ const VideoSection = () => {
         <div className="relative rounded-none sm:rounded-2xl shadow-none sm:shadow-2xl p-0 sm:p-4 md:p-6 flex flex-col justify-center items-center bg-transparent sm:bg-black/20">
           <MediaCarousel
             items={eventImages}
-            mobileAfter={
-              <div className="mt-2">
-                <PanelsSection compact />
-              </div>
-            }
+            // mobileAfter={
+            //   // <div className="mt-2">
+            //   //   <PanelsSection compact />
+            //   // </div>
+            // }
           />
         </div>
       </div>

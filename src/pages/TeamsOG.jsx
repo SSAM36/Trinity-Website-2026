@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { getCloudinaryUrl, getResponsiveUrls, getPlaceholderUrl } from "../utils/cloudinary";
+import {
+  getCloudinaryUrl,
+  getResponsiveUrls,
+  getPlaceholderUrl,
+} from "../utils/cloudinary";
 import { teamImagesMap } from "../data/teamImages";
 import OptimizedImage from "../components/OptimizedImage";
 
-
-const TeamsOG = () => {
+const TeamsOG = (compact=false) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filter, setFilter] = useState("Top Four"); // 🔹 default to Top Four
   const containerRef = useRef(null);
@@ -138,7 +141,11 @@ const TeamsOG = () => {
     const scrollSpeedFactor = 1.5; // Much faster scrolling - reduced from 5 to 1.5
     const updateScene = () => {
       // Reduced buffer for faster completion
-      setSceneHeight(window.innerHeight * (filteredDepartments.length + 0.5) * scrollSpeedFactor);
+      setSceneHeight(
+        window.innerHeight *
+          (filteredDepartments.length + 0.5) *
+          scrollSpeedFactor
+      );
     };
     updateScene();
 
@@ -213,95 +220,115 @@ const TeamsOG = () => {
     <div className="relative w-full" style={{ height: `${sceneHeight}px` }}>
       <div
         className="sticky top-0 left-0 w-full h-screen flex items-center justify-center p-1 md:p-2 bg-cover bg-center bg-no-repeat z-10"
-        style={{ backgroundImage: "url('../images/website bg for all pages.png')" }}
+        style={{
+          backgroundImage: "url('../images/website bg for all pages.png')",
+        }}
       >
-      <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
-      {/* 🔹 Horizontal Navbar */}
-      <div
-        className="absolute left-0 w-full z-20 overflow-x-auto top-16 sm:top-0"
-      >
-        <div
-          className="flex justify-center overflow-x-auto px-6 py-3 gap-6 
+        {/* 🔹 Horizontal Navbar */}
+        <div className="absolute left-0 w-full z-20 overflow-x-auto top-16 sm:top-0">
+          <div
+            className="flex justify-center overflow-x-auto px-6 py-3 gap-6 
                   text-white font-semibold text-lg 
                   bg-black/20 backdrop-blur-md rounded-full w-fit mx-auto"
-        >
-          {["Top Four", "Secretary", "VCP", "HOD"].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => {
-                setFilter(cat);
-                setCurrentIndex(0);
-                window.scrollTo(0, 0);
-              }}
-              className={`whitespace-nowrap px-4 py-1 rounded-full transition ${
-                filter === cat
-                 ? "drop-shadow-[0_0_10px_#dbab6a] text-[#dbab6a]"
-                  : "hover:text-[#dbab6a] hover:drop-shadow-[0_0_10px_#dbab6a]"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          >
+            {["Top Four", "Secretary", "VCP", "HOD"].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => {
+                  setFilter(cat);
+                  setCurrentIndex(0);
+                  window.scrollTo(0, 0);
+                }}
+                className={`whitespace-nowrap px-4 py-1 rounded-full transition ${
+                  filter === cat
+                    ? "drop-shadow-[0_0_10px_#dbab6a] text-[#dbab6a]"
+                    : "hover:text-[#dbab6a] hover:drop-shadow-[0_0_10px_#dbab6a]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div
-        className="text-center w-full relative sm:mt-6 mt-4 lg:mt-10"
-        ref={containerRef}
-      >
-        {filteredDepartments.map((dept, index) => (
-          <div
-            key={index}
-            className="absolute w-[80%] sm:w-[85%] md:w-[98%] lg:w-[100%] 
+        <div
+          className="text-center w-full relative sm:mt-6 mt-4 lg:mt-10"
+          ref={containerRef}
+        >
+          {filteredDepartments.map((dept, index) => (
+            <div
+              key={index}
+              className="absolute w-[80%] sm:w-[85%] md:w-[98%] lg:w-[100%] 
                max-h-[80vh] sm:max-h-[90vh] min-h-[45vh] 
                top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                rounded-2xl shadow-2xl text-white p-6 sm:p-10
                transition-all duration-700 ease-in-out
                backdrop-blur-lg border border-white/10 bg-gray-800/30 
                flex flex-col"
-            style={getCardStyle(index)}
-          >
-            {/* 🔹 Fixed Heading */}
-            <h2
-              className="text-3xl md:text-5xl text-[#dbab6a] text-center 
-                 transition-transform duration-500 hover:scale-105 mb-6 flex-shrink-0"
-              style={{ fontFamily: "'Great Vibes', cursive" }}
+              style={getCardStyle(index)}
             >
-              {dept.name}
-            </h2>
+              {/* 🔹 Fixed Heading */}
+              {/* ===== Title Section ===== */}
+              <div
+                className={`relative flex justify-center ${
+                  compact ? "mb-5" : "mb-8"
+                }`}
+              >
+                <div
+                  className={`inline-block text-center ${
+                    compact ? "px-4 py-2" : "px-7 py-3"
+                  } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+                >
+                  <h2
+                    className={`${
+                      compact ? "text-[16px]" : "text-[28px]"
+                    } md:text-[30px] leading-none text-[#E7B565]`}
+                    style={{ fontFamily: "'Reggae One', cursive" }}
+                  >
+                    {dept.name}
+                  </h2>
+                </div>
+              </div>
 
-            {/* 🔹 Scrollable Row */}
-          <div
-            className={`flex flex-row gap-6 px-4 lg:justify-center
-    ${dept.images.array.length === 1 ? "justify-center overflow-x-hidden" : "overflow-x-auto"}
+              {/* 🔹 Scrollable Row */}
+              <div
+                className={`flex flex-row gap-6 px-4 lg:justify-center
+    ${
+      dept.images.array.length === 1
+        ? "justify-center overflow-x-hidden"
+        : "overflow-x-auto"
+    }
     ${dept.images.array.length > 2 ? "md:justify-start" : "md:justify-center"}`}
-            style={{ maxHeight: "60vh" }}
-          >
-            {dept.images.array.map((publicId, i) => (
-              <OptimizedImage
-                key={`${dept.key}-${i}`}
-                publicId={publicId}
-                alt={`${dept.name} - Member ${i + 1}`}
-                className={`flex-shrink-0 
+                style={{ maxHeight: "60vh" }}
+              >
+                {dept.images.array.map((publicId, i) => (
+                  <OptimizedImage
+                    key={`${dept.key}-${i}`}
+                    publicId={publicId}
+                    alt={`${dept.name} - Member ${i + 1}`}
+                    className={`flex-shrink-0 
                     w-44 h-56 sm:w-56 sm:h-60 md:w-64 md:h-64 
                     lg:w-72 lg:h-72 xl:w-80 xl:h-80
                     rounded-lg transform transition duration-700 ease-in-out
-                    hover:scale-${dept.images.scale} hover:shadow-2xl hover:-translate-y-2 
+                    hover:scale-${
+                      dept.images.scale
+                    } hover:shadow-2xl hover:-translate-y-2 
                     hover:brightness-110 hover:contrast-110
                     ${dept.images.array.length === 1 ? "mx-auto block" : ""}`}
-                loading={index === currentIndex ? "eager" : "lazy"}
-              />
-            ))}
-          </div>
-          </div>
-        ))}
-      </div>
-      {/* close sticky viewport */}
+                    loading={index === currentIndex ? "eager" : "lazy"}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* close sticky viewport */}
       </div>
       <div className="h-[100vh]" aria-hidden></div>
     </div>
   );
 };
 
-export default TeamsOG; 
+export default TeamsOG;

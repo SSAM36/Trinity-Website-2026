@@ -5,7 +5,7 @@ import submitBg from "../images/submit bg.png";
 import submitBtn from "../images/submitbtn.png";
 import websiteBg from "../images/website bg for all pages.png";
 
-const RegistrationForm = () => {
+const RegistrationForm = (compact=false) => {
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "",
@@ -105,9 +105,27 @@ const RegistrationForm = () => {
                 backgroundColor: "rgba(0,0,0,0.6)" // semi-transparent overlay for readability
               }}>
       {/* Heading */}
-      <h2 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#e5a35c] mb-6 md:mb-8 lg:mb-10 text-center font-[Reggae_One] mt-8">
-        Registration
-      </h2>
+      {/* ===== Title Section ===== */}
+          <div
+            className={`relative flex justify-center ${
+              compact ? "mb-3" : "mb-6"
+            }`}
+          >
+            <div
+              className={`inline-block text-center ${
+                compact ? "px-5 py-2" : "px-8 py-3"
+              } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+            >
+              <h2
+                className={`${
+                  compact ? "text-[22px]" : "text-[32px]"
+                } md:text-[40px] leading-none text-[#E7B565]`}
+                style={{ fontFamily: "'Reggae One', cursive" }}
+              >
+                REGISTRATION 
+              </h2>
+            </div>
+          </div>
 
       {/* Form Container */}
       <div

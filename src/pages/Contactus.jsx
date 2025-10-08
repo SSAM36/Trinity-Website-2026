@@ -38,7 +38,7 @@ const SpotlightCard = ({
   );
 };
 
-const Contact = () => {
+const Contact = (compact=false) => {
   useEffect(() => {
     document.title = "Contact Us - Trinity";
   }, []);
@@ -75,9 +75,27 @@ const Contact = () => {
         </div>
         {/* Header */}
         <div className="text-center mb-16" style={{ fontFamily: "'Reggae One', cursive" }}>
-          <h1 className={`text-5xl md:text-6xl font-bold mb-6 uppercase tracking-widest`} style={{ color: gold }}>
-            Contact Us
-          </h1>
+          {/* ===== Title Section ===== */}
+          <div
+            className={`relative flex justify-center ${
+              compact ? "mb-3" : "mb-6"
+            }`}
+          >
+            <div
+              className={`inline-block text-center ${
+                compact ? "px-5 py-2" : "px-8 py-3"
+              } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+            >
+              <h2
+                className={`${
+                  compact ? "text-[22px]" : "text-[32px]"
+                } md:text-[52px] leading-none text-[#E7B565]`}
+                style={{ fontFamily: "'Reggae One', cursive" }}
+              >
+                CONTACT US
+              </h2>
+            </div>
+          </div>
           <p className="font-body text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Connect with the Trinity team to join D.J. Sanghvi’s premier festival of innovation, sports, and culture, attracting students from Mumbai and beyond.
           </p>
