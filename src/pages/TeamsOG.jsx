@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import photo1 from "/teams/profimg.png";
+import { getCloudinaryUrl, getResponsiveUrls, getPlaceholderUrl } from "../utils/cloudinary";
+import { teamImagesMap } from "../data/teamImages";
+import OptimizedImage from "../components/OptimizedImage";
 
 
 const TeamsOG = () => {
@@ -9,220 +11,119 @@ const TeamsOG = () => {
   const [sceneHeight, setSceneHeight] = useState(window.innerHeight);
 
   const departments = [
-    // {
-    //   name: "Mentors",
-    //   images: { array: [photo1, photo1, photo1], scale: "110" },
-    //   title: "Mentors",
-    // },
-    // {
-    //   name: "Conveners",
-    //   images: { array: [photo1, photo1, photo1], scale: "110" },
-    //   title: "Mentors",
-    // },
-    // {
-    //   name: "Technical Conveners",
-    //   images: { array: [photo1, photo1, photo1], scale: "110" },
-    //   title: "Mentors",
-    // },
-    // {
-    //   name: "Cultural Conveners",
-    //   images: { array: [photo1, photo1, photo1], scale: "110" },
-    //   title: "Mentors",
-    // },
-    // {
-    //   name: "Sports Conveners",
-    //   images: { array: [photo1, photo1, photo1], scale: "110" },
-    //   title: "Mentors",
-    // },
     {
       name: "Chairperson",
-      images: { array: ["/teams/TeamsImg/47.png"], scale: "105" },
+      images: { array: teamImagesMap.chairperson, scale: "105" },
       title: "Top Four",
+      key: "chairperson",
     },
     {
       name: "Joint Chairperson",
-      images: {
-        array: [
-          "/teams/TeamsImg/44.png",
-          "/teams/TeamsImg/45.png",
-          "/teams/TeamsImg/46.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.jointChairperson, scale: "105" },
       title: "Top Four",
+      key: "jointChairperson",
     },
     {
       name: "Technical Secretary",
-      images: {
-        array: [
-          "/teams/TeamsImg/12.png",
-          "/teams/TeamsImg/13.png",
-          "/teams/TeamsImg/14.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.technicalSecretary, scale: "105" },
       title: "Secretary",
+      key: "technicalSecretary",
     },
     {
       name: "Cultural Secretary",
-      images: {
-        array: [
-          "/teams/TeamsImg/37.png",
-          "/teams/TeamsImg/38.png",
-          "/teams/TeamsImg/39.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.culturalSecretary, scale: "105" },
       title: "Secretary",
+      key: "culturalSecretary",
     },
     {
       name: "Sports Secretary",
-      images: {
-        array: [
-          "/teams/TeamsImg/9.png",
-          "/teams/TeamsImg/10.png",
-          "/teams/TeamsImg/11.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.sportsSecretary, scale: "105" },
       title: "Secretary",
+      key: "sportsSecretary",
     },
     {
       name: "Secretary",
-      images: {
-        array: ["/teams/TeamsImg/40.png", "/teams/TeamsImg/41.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.secretary, scale: "105" },
       title: "Secretary",
+      key: "secretary",
     },
     {
       name: "Treasurer",
-      images: {
-        array: ["/teams/TeamsImg/42.png", "/teams/TeamsImg/43.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.treasurer, scale: "105" },
       title: "Secretary",
+      key: "treasurer",
     },
-
     {
       name: "Sports Head of Department",
-      images: {
-        array: [
-          "/teams/TeamsImg/6.png",
-          "/teams/TeamsImg/7.png",
-          "/teams/TeamsImg/8.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.sportsHOD, scale: "105" },
       title: "HOD",
+      key: "sportsHOD",
     },
     {
       name: "Events Vice Chairperson",
-      images: {
-        array: [
-          "/teams/TeamsImg/15.png",
-          "/teams/TeamsImg/16.png",
-          "/teams/TeamsImg/17.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.eventsVCP, scale: "105" },
       title: "VCP",
+      key: "eventsVCP",
     },
     {
       name: "Marketing Vice Chairperson",
-      images: {
-        array: [
-          "/teams/TeamsImg/32.png",
-          "/teams/TeamsImg/33.png",
-          "/teams/TeamsImg/34.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.marketingVCP, scale: "105" },
       title: "VCP",
+      key: "marketingVCP",
     },
     {
       name: "Marketing Head of Department",
-      images: {
-        array: ["/teams/TeamsImg/35.png", "/teams/TeamsImg/36.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.marketingHOD, scale: "105" },
       title: "HOD",
+      key: "marketingHOD",
     },
     {
-      name: "Creatives Vice Chairperson ",
-      images: {
-        array: ["/teams/TeamsImg/1.png", "/teams/TeamsImg/2.png"],
-        scale: "105",
-      },
+      name: "Creatives Vice Chairperson",
+      images: { array: teamImagesMap.creativesVCP, scale: "105" },
       title: "VCP",
+      key: "creativesVCP",
     },
     {
       name: "Creatives Head of Department",
-      images: {
-        array: [
-          "/teams/TeamsImg/3.png",
-          "/teams/TeamsImg/4.png",
-          "/teams/TeamsImg/5.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.creativesHOD, scale: "105" },
       title: "HOD",
+      key: "creativesHOD",
     },
     {
       name: "Editorial Vice Chairperson",
-      images: {
-        array: ["/teams/TeamsImg/23.png", "/teams/TeamsImg/24.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.editorialVCP, scale: "105" },
       title: "VCP",
+      key: "editorialVCP",
     },
     {
       name: "Publicity Vice Chairperson",
-      images: {
-        array: [
-          "/teams/TeamsImg/18.png",
-          "/teams/TeamsImg/19.png",
-          "/teams/TeamsImg/20.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.publicityVCP, scale: "105" },
       title: "VCP",
+      key: "publicityVCP",
     },
     {
       name: "Hospitality AR Vice Chairperson",
-      images: {
-        array: ["/teams/TeamsImg/25.png", "/teams/TeamsImg/26.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.hospitalityVCP, scale: "105" },
       title: "VCP",
+      key: "hospitalityVCP",
     },
     {
       name: "Hospitality AR Head of Department",
-      images: {
-        array: ["/teams/TeamsImg/27.png", "/teams/TeamsImg/28.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.hospitalityHOD, scale: "105" },
       title: "HOD",
+      key: "hospitalityHOD",
     },
     {
       name: "Operations Vice Chairperson",
-      images: {
-        array: [
-          "/teams/TeamsImg/29.png",
-          "/teams/TeamsImg/30.png",
-          "/teams/TeamsImg/31.png",
-        ],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.operationsVCP, scale: "105" },
       title: "VCP",
+      key: "operationsVCP",
     },
     {
       name: "Security Vice Chairperson",
-      images: {
-        array: ["/teams/TeamsImg/21.png", "/teams/TeamsImg/22.png"],
-        scale: "105",
-      },
+      images: { array: teamImagesMap.securityVCP, scale: "105" },
       title: "VCP",
+      key: "securityVCP",
     },
   ];
 
@@ -234,10 +135,10 @@ const TeamsOG = () => {
 
   // 🔹 update scene height and index according to filtered data
   useEffect(() => {
-    const scrollSpeedFactor = 5; // increase total scroll distance per section
+    const scrollSpeedFactor = 1.5; // Much faster scrolling - reduced from 5 to 1.5
     const updateScene = () => {
-      // Add extra buffer so footer only shows after final card finishes
-      setSceneHeight(window.innerHeight * (filteredDepartments.length + 2) * scrollSpeedFactor);
+      // Reduced buffer for faster completion
+      setSceneHeight(window.innerHeight * (filteredDepartments.length + 0.5) * scrollSpeedFactor);
     };
     updateScene();
 
@@ -377,17 +278,19 @@ const TeamsOG = () => {
     ${dept.images.array.length > 2 ? "md:justify-start" : "md:justify-center"}`}
             style={{ maxHeight: "60vh" }}
           >
-            {dept.images.array.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt="Photo"
-                className={`flex-shrink-0 object-contain 
-                    w-44 h-68 sm:w-56 sm:h-60 md:w-64 md:h-64 
+            {dept.images.array.map((publicId, i) => (
+              <OptimizedImage
+                key={`${dept.key}-${i}`}
+                publicId={publicId}
+                alt={`${dept.name} - Member ${i + 1}`}
+                className={`flex-shrink-0 
+                    w-44 h-56 sm:w-56 sm:h-60 md:w-64 md:h-64 
                     lg:w-72 lg:h-72 xl:w-80 xl:h-80
                     rounded-lg transform transition duration-700 ease-in-out
                     hover:scale-${dept.images.scale} hover:shadow-2xl hover:-translate-y-2 
-                    hover:brightness-110 hover:contrast-110 ${dept.images.array.length === 1 ? "mx-auto block" : ""}`}
+                    hover:brightness-110 hover:contrast-110
+                    ${dept.images.array.length === 1 ? "mx-auto block" : ""}`}
+                loading={index === currentIndex ? "eager" : "lazy"}
               />
             ))}
           </div>
