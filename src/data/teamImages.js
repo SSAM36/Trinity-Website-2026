@@ -3,62 +3,62 @@
 // Update the publicId values after uploading images to Cloudinary
 
 export const teamImagesMap = {
-  // Chairperson
-  chairperson: ["teams/47"], // 47.png
+  // Chairperson - image 47
+  chairperson: ["47_flgzgr"],
   
-  // Joint Chairpersons
-  jointChairperson: ["teams/44", "teams/45", "teams/46"], // 44.png, 45.png, 46.png
+  // Joint Chairpersons - images 44, 45, 46
+  jointChairperson: ["44_dzc027", "45_qyvl1g", "46_a7rfdi"],
   
-  // Technical Secretary
-  technicalSecretary: ["teams/12", "teams/13", "teams/14"], // 12.png, 13.png, 14.png
+  // Technical Secretary - images 12, 13, 14
+  technicalSecretary: ["12_ggisf1", "13_rh8dk0", "14_nsux8h"],
   
-  // Cultural Secretary
-  culturalSecretary: ["teams/37", "teams/38", "teams/39"], // 37.png, 38.png, 39.png
+  // Cultural Secretary - images 37, 38, 39
+  culturalSecretary: ["37_axvlk7", "38_yviupq", "39_fxq1rv"],
   
-  // Sports Secretary
-  sportsSecretary: ["teams/9", "teams/10", "teams/11"], // 9.png, 10.png, 11.png
+  // Sports Secretary - images 9, 10, 11
+  sportsSecretary: ["9_hxvcan", "10_zsap80", "11_k3uhlr"],
   
-  // Secretary
-  secretary: ["teams/40", "teams/41"], // 40.png, 41.png
+  // Secretary - images 40, 41
+  secretary: ["40_kdjdat", "41_ibyqca"],
   
-  // Treasurer
-  treasurer: ["teams/42", "teams/43"], // 42.png, 43.png
+  // Treasurer - images 42, 43
+  treasurer: ["42_x8k1y6", "43_vjgzhd"],
   
-  // Sports HOD
-  sportsHOD: ["teams/6", "teams/7", "teams/8"], // 6.png, 7.png, 8.png
+  // Sports HOD - images 6, 7, 8
+  sportsHOD: ["6_s1xvn9", "7_iw6dih", "8_q7hrcs"],
   
-  // Events VCP
-  eventsVCP: ["teams/15", "teams/16", "teams/17"], // 15.png, 16.png, 17.png
+  // Events VCP - images 15, 16, 17
+  eventsVCP: ["15_z7y9je", "16_rx9ujf", "17_kkxb9x"],
   
-  // Marketing VCP
-  marketingVCP: ["teams/32", "teams/33", "teams/34"], // 32.png, 33.png, 34.png
+  // Marketing VCP - images 32, 33, 34
+  marketingVCP: ["32_reygzn", "33_otfhdx", "34_suxyiy"],
   
-  // Marketing HOD
-  marketingHOD: ["teams/35", "teams/36"], // 35.png, 36.png
+  // Marketing HOD - images 35, 36
+  marketingHOD: ["35_jjppxj", "36_ybvom3"],
   
-  // Creatives VCP
-  creativesVCP: ["teams/1", "teams/2"], // 1.png, 2.png
+  // Creatives VCP - images 1, 2
+  creativesVCP: ["1_nt7gja", "2_jrvvql"],
   
-  // Creatives HOD
-  creativesHOD: ["teams/3", "teams/4", "teams/5"], // 3.png, 4.png, 5.png
+  // Creatives HOD - images 3, 4, 5
+  creativesHOD: ["3_arzofm", "4_fx53x1", "5_pitblm"],
   
-  // Editorial VCP
-  editorialVCP: ["teams/23", "teams/24"], // 23.png, 24.png
+  // Editorial VCP - images 23, 24
+  editorialVCP: ["23_jjvr8y", "24_menkts"],
   
-  // Publicity VCP
-  publicityVCP: ["teams/18", "teams/19", "teams/20"], // 18.png, 19.png, 20.png
+  // Publicity VCP - images 18, 19, 20
+  publicityVCP: ["18_rqzzxn", "19_xzx15d", "20_dxyzda"],
   
-  // Hospitality AR VCP
-  hospitalityVCP: ["teams/25", "teams/26"], // 25.png, 26.png
+  // Hospitality AR VCP - images 25, 26
+  hospitalityVCP: ["25_fj0sxo", "26_uu7acy"],
   
-  // Hospitality AR HOD
-  hospitalityHOD: ["teams/27", "teams/28"], // 27.png, 28.png
+  // Hospitality AR HOD - images 27, 28
+  hospitalityHOD: ["27_ozbljn", "28_gvsugz"],
   
-  // Operations VCP
-  operationsVCP: ["teams/29", "teams/30", "teams/31"], // 29.png, 30.png, 31.png
+  // Operations VCP - images 29, 30, 31
+  operationsVCP: ["29_bhe8dk", "30_dejg21", "31_j0b6og"],
   
-  // Security VCP
-  securityVCP: ["teams/21", "teams/22"], // 21.png, 22.png
+  // Security VCP - images 21, 22
+  securityVCP: ["21_ivghbz", "22_beiol4"]
 };
 
 // Helper function to get image URLs for a department

@@ -23,8 +23,9 @@ const OptimizedImage = ({
 
   const placeholderUrl = getPlaceholderUrl(publicId);
 
-  // Generate local fallback path (remove teams/ prefix and add proper path)
-  const localImagePath = `/teams/TeamsImg/${publicId.replace('teams/', '')}.png`;
+  // Generate local fallback path 
+  const cleanId = publicId.split('_')[0]; // Remove suffix like '_dzc027' to get original number
+  const localImagePath = `/teams/TeamsImg/${cleanId}.png`;
 
   // Fallback to placeholder if Cloudinary cloud name is not set
   if (!import.meta.env.VITE_CLOUDINARY_CLOUD_NAME) {
