@@ -128,12 +128,12 @@ export default function Sponsor() {
                 <img
                   src={sponsor.url}
                   alt={sponsor.name}
-                  className="h-4/5 w-4/5 transition-all duration-300 group-hover:blur-sm rounded-2xl md:rounded-3xl object-contain"
+                  className="h-4/5 w-4/5 transition-all duration-300 group-hover:blur-lg rounded-2xl md:rounded-3xl object-contain"
                 />
 
                 {/* Text Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 text-[#002147]">
-                  <p className="text-xl font-bold">{sponsor.name}</p>
+                <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 text-amber">
+                  <p className="text-2xl font-bold">{sponsor.name}</p>
                 </div>
               </a>
             </div>

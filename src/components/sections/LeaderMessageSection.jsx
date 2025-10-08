@@ -8,7 +8,7 @@ const LeaderMessageSection = ({ imageSrc, title = 'Dr. Hari Vasudevan', children
   return (
     <section className="w-full py-12 md:py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="w-full bg-[#232d41] rounded-2xl p-4 md:p-6 shadow-2xl/70">
+        <div className="w-full bg-[#232d41]/30 rounded-2xl p-4 md:p-6 shadow-2xl/70">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             {/* Left: Image */}
             <div className="w-full">
