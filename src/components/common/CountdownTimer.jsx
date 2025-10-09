@@ -1,38 +1,29 @@
 import { useState, useEffect } from "react";
 
+const calculateTimeLeft = () => {
+  const targetDate = new Date("2025-10-17T17:00:00+05:30");
+  const now = new Date();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  return { days, hours, minutes, seconds };
+};
+
 const CountdownTimer = ({ showContent }) => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 10,
-    hours: 12,
-    minutes: 22,
-    seconds: 50
-  });
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { days, hours, minutes, seconds } = prev;
-
-        if (seconds > 0) {
-          seconds--;
-        } else if (minutes > 0) {
-          minutes--;
-          seconds = 59;
-        } else if (hours > 0) {
-          hours--;
-          minutes = 59;
-          seconds = 59;
-        } else if (days > 0) {
-          days--;
-          hours = 23;
-          minutes = 59;
-          seconds = 59;
-        }
-
-        return { days, hours, minutes, seconds };
-      });
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
