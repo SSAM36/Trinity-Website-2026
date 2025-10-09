@@ -26,10 +26,10 @@ const Events = () => {
             }}
           >
             <h3
-              className="text-3xl md:text-5xl font-bold mb-2"
+              className="text-3xl lg:text-5xl font-bold mb-2"
               style={{
                 fontFamily: "Circe Contrast",
-                fontSize: "43.5px",
+                // fontSize: "43.5px",
                 color: "#2d1e12",
               }}
             >

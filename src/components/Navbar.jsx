@@ -36,7 +36,7 @@ const Navbar = () => {
     <>
       {/* Desktop Navbar */}
       <header
-        className={`hidden md:flex fixed top-0 left-0 w-full z-50 items-center justify-between transition-all duration-300 px-10 ${
+        className={`hidden lg:flex fixed top-0 left-0 w-full z-50 items-center justify-between transition-all duration-300 px-10 ${
           scrolled
             ? "bg-[#0b1a3b]/40 py-2.5 backdrop-blur-md border-b border-white/10"
             : "bg-gradient-to-b from-[#0b1a3b]/30 to-transparent py-4 border-b border-transparent"
@@ -48,7 +48,7 @@ const Navbar = () => {
         {/* Desktop layout: left links, centered logo, right links using 3-column grid to avoid overlap */}
         <div className="w-full grid grid-cols-3 items-center">
           {/* Left group (4) */}
-          <nav className="flex space-x-8 items-center justify-start relative z-10">
+          <nav className="flex space-x-4 xl:space-x-8 items-center justify-start relative z-10">
             {leftLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -73,7 +73,7 @@ const Navbar = () => {
           </div>
 
           {/* Right group (3) */}
-          <nav className="flex space-x-8 items-center justify-end relative z-10">
+          <nav className="flex space-x-4 xl:space-x-8 items-center justify-end relative z-10">
             {rightLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -93,7 +93,7 @@ const Navbar = () => {
       </header>
 
       {/* Mobile Navbar */}
-      <div className="md:hidden" style={{ fontFamily: "'Reggae One', cursive" }}>
+      <div className="lg:hidden" style={{ fontFamily: "'Reggae One', cursive" }}>
         {/* Mobile Top Bar: Centered Logo + Right Hamburger */}
         <div className="fixed top-0 left-0 w-full h-14 z-60 flex items-center justify-center bg-transparent backdrop-blur-sm border-b border-white/10">
           <Link to="/" className="pointer-events-auto">

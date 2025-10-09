@@ -229,7 +229,7 @@ const TeamsOG = (compact=false) => {
         {/* 🔹 Horizontal Navbar */}
         <div className="absolute left-0 w-full z-20 overflow-x-auto top-16 sm:top-0">
           <div
-            className="flex justify-center overflow-x-auto px-6 py-3 gap-6 
+            className="flex justify-center overflow-x-auto px-2 xl:px-6 py-3 gap-6 
                   text-white font-semibold text-lg 
                   bg-black/20 backdrop-blur-md rounded-full w-fit mx-auto"
           >
@@ -241,7 +241,7 @@ const TeamsOG = (compact=false) => {
                   setCurrentIndex(0);
                   window.scrollTo(0, 0);
                 }}
-                className={`whitespace-nowrap px-4 py-1 rounded-full transition ${
+                className={`whitespace-nowrap px-3 md:px-4 py-1 rounded-full transition ${
                   filter === cat
                     ? "drop-shadow-[0_0_10px_#dbab6a] text-[#dbab6a]"
                     : "hover:text-[#dbab6a] hover:drop-shadow-[0_0_10px_#dbab6a]"
@@ -308,9 +308,9 @@ const TeamsOG = (compact=false) => {
                     key={`${dept.key}-${i}`}
                     publicId={publicId}
                     alt={`${dept.name} - Member ${i + 1}`}
-                    className={`flex-shrink-0 
-                    w-44 h-56 sm:w-56 sm:h-60 md:w-64 md:h-64 
-                    lg:w-72 lg:h-72 xl:w-80 xl:h-80
+                    className={`flex-shrink-0  object-contain
+                    w-44 h-68 sm:w-56 sm:h-60 md:w-64 md:h-64 
+                    lg:w-70 lg:h-72 xl:w-80 xl:h-80
                     rounded-lg transform transition duration-700 ease-in-out
                     hover:scale-${
                       dept.images.scale
