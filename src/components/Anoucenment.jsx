@@ -1,4 +1,5 @@
 // import React from "react";
+import React, { useEffect, useState } from "react";
 // import hmpgbg from "../images/parch.png";
 
 // const Anoucenment = (compact = false) => {
@@ -68,40 +69,28 @@
 //           ))}
 //         </div>
 //       </div>
-//     </section>
-//   );
-// };
-
-// export default Anoucenment;
-
-import React from "react";
 import hmpgbg from "../images/parch.png";
 
 const Anoucenment = ({ compact = false }) => {
-  // 🔹 Example announcements
-  const announcements = [
-    {
-      id: 1,
-      title: "Cultural Night",
-      description: "An evening filled with music, dance, and performances.",
-      date: "October 15, 2025",
-      time: "7:00 PM – 10:00 PM",
-    },
-    {
-      id: 2,
-      title: "Sports Finals",
-      description: "Cheer for your favorite teams as they battle for glory.",
-      date: "October 18, 2025",
-      time: "9:00 AM – 1:00 PM",
-    },
-    {
-      id: 3,
-      title: "Tech Expo",
-      description: "Explore innovative student tech projects and prototypes.",
-      date: "October 20, 2025",
-      time: "11:00 AM – 4:00 PM",
-    },
-  ];
+  const API_BASE = import.meta.env.VITE_API_BASE;
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      try {
+        const res = await fetch(`${API_BASE}/announcements`);
+        const data = await res.json();
+        if (mounted && Array.isArray(data)) setAnnouncements(data);
+      } catch (err) {
+        console.error("Error loading announcements", err);
+      }
+    }
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, [API_BASE]);
 
   return (
     <section className="w-full py-12 md:py-16 px-4">
@@ -174,6 +163,13 @@ const Anoucenment = ({ compact = false }) => {
                   <td className="py-4 px-6">{item.time}</td>
                 </tr>
               ))}
+              {announcements.length === 0 && (
+                <tr>
+                  <td className="py-8 px-6 text-center opacity-80" colSpan={5}>
+                    No announcements yet.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

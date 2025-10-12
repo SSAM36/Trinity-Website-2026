@@ -9,6 +9,7 @@ import Sponsors from './pages/Sponsors'
 import TeamsOG from './pages/TeamsOG'
 import Gallery from './pages/Gallery'
 import Events from './pages/Events'
+import AdminDashboard from "./pages/AdminDashboard";
 import EventCategoryPage from './pages/EventsCategoryPage'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:category" element={<EventCategoryPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />

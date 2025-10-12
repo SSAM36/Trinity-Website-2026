@@ -9,18 +9,18 @@ function Leaderboard(compact = false) {
   const [loading, setLoading] = useState(true);
 
   const teamDefs = [
-    // { name: "Devadatta", color: "text-sky-200", icon: <FaStar className="text-sky-200 text-2xl sm:text-3xl md:text-4xl" /> },
-    // { name: "Vasuki", color: "text-green-400", icon: <GiSnake className="text-green-500 text-2xl sm:text-3xl md:text-4xl" /> },
-    // { name: "Mayura", color: "text-sky-400", icon: <FaFeatherAlt className="text-blue-400 text-2xl sm:text-3xl md:text-4xl" /> },
-    // { name: "Airavata", color: "text-gray-200", icon: <FaHorse className="text-gray-100 text-2xl sm:text-3xl md:text-4xl" /> },
-    // { name: "Garuda", color: "text-yellow-400", icon: <GiEagleHead className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl" /> },
-    // { name: "Simha", color: "text-orange-500", icon: <GiLion className="text-orange-500 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Devadatta", color: "text-sky-200", icon: <FaStar className="text-sky-200 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Vasuki", color: "text-green-400", icon: <GiSnake className="text-green-500 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Mayura", color: "text-sky-400", icon: <FaFeatherAlt className="text-blue-400 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Airavata", color: "text-gray-200", icon: <FaHorse className="text-gray-100 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Garuda", color: "text-yellow-400", icon: <GiEagleHead className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl" /> },
+    { name: "Simha", color: "text-orange-500", icon: <GiLion className="text-orange-500 text-2xl sm:text-3xl md:text-4xl" /> },
   ];
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/leaderboard`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE}/leaderboard`);
         if (!res.ok) throw new Error("Failed to fetch leaderboard");
         const payload = await res.json();
         const rows = Array.isArray(payload?.data) ? payload.data : [];
@@ -94,7 +94,7 @@ function Leaderboard(compact = false) {
           </div>
 
       {/* Temporarily replacing the leaderboard standings with the countdown timer. */}
-      {/*
+      {
       <div className="w-full max-w-5xl mx-auto flex flex-col gap-3 px-4 sm:px-6">
         {loading ? (
           <p className="text-center text-gray-300 py-10">Loading...</p>
@@ -119,7 +119,7 @@ function Leaderboard(compact = false) {
           ))
         )}
       </div>
-      */}
+      }
 
       {/* Countdown section in place of leaderboard */}
       <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-4 sm:px-6 py-8">
