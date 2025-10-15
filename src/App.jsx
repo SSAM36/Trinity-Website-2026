@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Contact from './pages/Contactus'
 import Navbar from './components/Navbar'
@@ -32,6 +34,8 @@ const App = () => {
       className="min-h-screen flex flex-col bg-cover bg-center bg-fixed"
       style={{ backgroundImage: `url(${siteBg})` }}
     >
+      <Analytics />
+      <SpeedInsights />
       <BrowserRouter>
         <ScrollToTop />
         <Navbar />
