@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <main className="relative min-h-[calc(100vh-120px)] flex items-center justify-center overflow-hidden">
       {/* Full-page background */}
-        {/* <SplashCursor /> */}
+        <SplashCursor />
       <div
         className="absolute inset-0 bg-center bg-cover"
         style={{ backgroundImage: `url(${siteBg})` }}
@@ -21,7 +21,6 @@ const HeroSection = () => {
           className="w-64 h-auto md:w-96 lg:w-[28rem]"
         />
       </div>
-      
     </main>
   );
 };

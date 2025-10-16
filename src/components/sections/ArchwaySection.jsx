@@ -92,10 +92,10 @@ const ArchwaySection = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top top",     // start pin as soon as section hits the top
-        end: "+=200%",        // give more scroll distance to complete zoom/fade
+        start: "center center", // start when temple is fully revealed on screen
+        end: "+=120%",         // one extra scroll-length for the transition
         scrub: 1,
-        pin: true,             // hold during the transition
+        pin: true,              // hold during the transition
         anticipatePin: 1,
       },
       defaults: { ease: "power2.out" },

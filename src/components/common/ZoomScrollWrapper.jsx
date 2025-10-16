@@ -16,11 +16,43 @@ export default function ZoomScrollWrapper({ children }) {
     // Reset any existing animations
     gsap.killTweensOf(content);
 
-    // Ensure 3D context only (no inner ScrollTrigger)
+    // Ensure 3D context
     gsap.set(el, { transformStyle: 'preserve-3d' });
     gsap.set(content, { transformStyle: 'preserve-3d' });
 
+    // Smooth 3D perspective scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom-=80',
+        end: 'center center',
+        scrub: 1.2,
+        ease: 'power3.out',
+      }
+    });
+
+    // From slightly away and tilted to natural position
+    tl.fromTo(content,
+      { 
+        z: -180, 
+        scale: 0.9, 
+        opacity: 0.6, 
+        y: 80, 
+        rotateX: 6, 
+        filter: 'blur(2px)'
+      },
+      { 
+        z: 0, 
+        scale: 1, 
+        opacity: 1, 
+        y: 0, 
+        rotateX: 0, 
+        filter: 'blur(0px)'
+      }
+    );
+
     return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
       gsap.killTweensOf(content);
     };
   }, []);

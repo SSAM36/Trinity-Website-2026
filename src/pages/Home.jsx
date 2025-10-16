@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import HeroSection from "../components/HeroSection";
-import ThreeDCarousel from "../components/reveal/ThreeDCarousel";
 
 // Lazy load sections that are below the fold
 const VideoSection = lazy(() => import("../components/sections/VideoSection"));
