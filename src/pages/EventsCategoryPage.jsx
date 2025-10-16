@@ -5,13 +5,14 @@ import EventCard from "../components/EventCard";
 import websiteBg from "../images/backgroundImage.png";
 
 const EventCategoryPage = () => {
-  const { category } = useParams();
+const { categorySlug } = useParams();
+const category = categorySlug; // optional alias if needed
   const events = eventsByCategory[category];
 
   if (!events) {
     return (
       <h2 className="text-center text-white text-2xl mt-20">
-        No events found for "{category}"
+       No events found for {category}
       </h2>
     );
   }

@@ -10,8 +10,31 @@
 
 #drag-container {
   touch-action: none;
+  transform-style: preserve-3d;
+  overflow: visible; /* allow 3D elements to protrude */
 }
 
 body {
   background: #111;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+#drag-container {
+  max-width: 100%;
+  overflow: visible;
+}
+
+#spin-container {
+  max-width: 100%;
+  overflow: visible; /* do not clip items placed with translateZ */
+  transform-style: preserve-3d;
+}
+
+#spin-container img, #spin-container video {
+  margin: 0 10px;
+  backface-visibility: hidden;
+  transform-origin: center center;
 }
