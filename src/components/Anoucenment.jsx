@@ -119,7 +119,7 @@ const Anoucenment = ({ compact = false }) => {
 
         {/* ===== Table Section ===== */}
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-white rounded-xl overflow-hidden shadow-xl text-[17px] md:text-[18px]">
+          <table className="w-full table-auto border-collapse text-white rounded-xl overflow-hidden shadow-xl text-sm sm:text-base md:text-lg">
             <thead>
               <tr className="bg-[#1A0F08] border-b border-[#8C6A3E]">
                 <th className="py-4 px-6 text-left text-[#E7B565] font-semibold">
@@ -144,7 +144,7 @@ const Anoucenment = ({ compact = false }) => {
               {announcements.map((item, index) => (
                 <tr
                   key={item.id}
-                  className="bg-gray-900/60 border-b border-[#8C6A3E]/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_6px_20px_rgba(231,181,101,0.25)]"
+                  className="bg-gray-900/60 border-b border-[#8C6A3E]/30 transition-all duration-300 hover:shadow-[0_6px_20px_rgba(231,181,101,0.25)] hover:scale-[1.01] md:hover:scale-[1.02]"
                   style={{
                     backgroundImage: `url(${hmpgbg})`,
                     backgroundSize: "cover",
@@ -152,20 +152,20 @@ const Anoucenment = ({ compact = false }) => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <td className="py-4 px-6 font-medium">{index + 1}</td>
-                  <td className="py-4 px-6 font-semibold">{item.title}</td>
-                  <td className="py-4 px-6 opacity-90 relative">
+                  <td className="py-4 px-6 font-medium align-top">{index + 1}</td>
+                  <td className="py-4 px-6 font-semibold align-top break-words whitespace-normal">{item.title}</td>
+                  <td className="py-4 px-6 opacity-90 relative align-top break-words whitespace-normal">
                     {item.description}
                     {/* Golden line under description */}
                     <div className="absolute left-0 bottom-0 w-full h-[1px] bg-[#E7B565] opacity-70"></div>
                   </td>
-                  <td className="py-4 px-6">{item.date}</td>
-                  <td className="py-4 px-6">{item.time}</td>
+                  <td className="py-4 px-6 align-top whitespace-nowrap">{item.date}</td>
+                  <td className="py-4 px-6 align-top whitespace-nowrap">{item.time}</td>
                 </tr>
               ))}
               {announcements.length === 0 && (
                 <tr>
-                  <td className="py-8 px-6 text-center opacity-80" colSpan={5}>
+                  <td className="py-8 px-6 text-center opacity-80 text-white" colSpan={5}>
                     No announcements yet.
                   </td>
                 </tr>
