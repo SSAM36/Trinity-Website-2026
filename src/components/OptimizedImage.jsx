@@ -12,10 +12,10 @@ const OptimizedImage = ({
   const [hasError, setHasError] = useState(false);
   const [useLocalFallback, setUseLocalFallback] = useState(false);
 
-  // Generate responsive URLs without forcing dimensions (preserve original aspect ratio)
+  // Generate responsive URLs with optimized settings for performance
   const imageUrl = getCloudinaryUrl(publicId, {
-    width: 600, // Higher quality but let height be auto
-    quality: 90, // Higher quality to maintain original look
+    width: 500, // Optimized size for faster loading
+    quality: 70, // Balanced quality/size ratio
     autoFormat: true,
     autoGravity: false, // Don't auto-crop, preserve original
     crop: 'scale' // Scale instead of fill to preserve aspect ratio

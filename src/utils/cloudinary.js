@@ -19,52 +19,49 @@ const cld = new Cloudinary({
  * @param {string} options.crop - Crop mode ('fill', 'fit', 'scale', etc.)
  * @param {number} options.quality - Image quality (1-100)
  * @param {boolean} options.autoFormat - Auto format selection
- * @param {boolean} options.autoGravity - Auto gravity for cropping
  * @returns {string} Optimized image URL
  */
 export const getCloudinaryUrl = (publicId, options = {}) => {
-  if (!import.meta.env.VITE_CLOUDINARY_CLOUD_NAME) {
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+  
+  if (!cloudName) {
     console.warn('Cloudinary cloud name not found in environment variables');
     return '';
   }
 
   const {
-    width = 600,
-    height = null, // Let height be auto to preserve aspect ratio
-    crop = 'scale', // Use scale to preserve original proportions
-    quality = 90,
+    width = 800, // Reduced from 1200 to 800 for better performance
+    height = null,
+    crop = 'scale',
+    quality = 70, // Reduced from 85-90 to 70 for better compression
     autoFormat: enableAutoFormat = true,
-    autoGravity: enableAutoGravity = false // Don't auto-crop by default
   } = options;
 
-  let transformation = cld.image(publicId)
-    .delivery(qualityAction(quality));
-
-  // Apply resizing based on crop mode
+  // Build transformation string manually for better control
+  const transformations = [];
+  
+  // Add crop mode and dimensions
   if (crop === 'scale') {
-    // Scale preserving aspect ratio
-    transformation = transformation.resize(auto().width(width));
+    transformations.push(`c_scale,w_${width}`);
   } else if (height) {
-    // Only apply height if specified and not using scale
-    transformation = transformation.resize(auto().width(width).height(height));
+    transformations.push(`c_${crop},w_${width},h_${height}`);
   } else {
-    // Just width, let height be auto
-    transformation = transformation.resize(auto().width(width));
+    transformations.push(`c_scale,w_${width}`);
   }
-
-  // Apply auto format for optimal file format
+  
+  // Add quality - use auto:low for even better compression
+  transformations.push(`q_${quality}`);
+  
+  // Add auto format - this will serve WebP/AVIF to modern browsers
   if (enableAutoFormat) {
-    transformation = transformation.delivery(format('auto'));
+    transformations.push('f_auto');
   }
 
-  // Apply auto gravity only if specifically requested
-  if (enableAutoGravity && crop === 'fill' && height) {
-    transformation = transformation.resize(
-      auto().width(width).height(height).gravity(autoGravity())
-    );
-  }
-
-  return transformation.toURL();
+  // Combine all transformations with comma
+  const transformString = transformations.join(',');
+  
+  // Build the final URL
+  return `https://res.cloudinary.com/${cloudName}/image/upload/${transformString}/${publicId}`;
 };
 
 /**

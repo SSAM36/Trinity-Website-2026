@@ -1,0 +1,48 @@
+// Cloudinary public IDs for sponsor images
+export const sponsorImagesMap = {
+  "5paisa": "5paisa_purak1",
+  "Asmi": "Asmi_zeavvl",
+  "calorie_minus": "calorie_minus_nmgkr4",
+  "CakesAndCrumbs": "CakesAndCrumbs_u39glj",
+  "Coke_Studio_Bharat": "Coke_Studio_Bharat_b0bmek",
+  "coco-cola": "coco-cola_uupt1q",
+  "food_Adda": "food_Adda_txpwws",
+  "greenMonk": "greenMonk_h6a3zb",
+  "houseOfBramhma": "houseOfBramhma_scpg13",
+  "Idlish": "Idlish_yaq6ro",
+  "khadiIndia": "khadiIndia_fepoe2",
+  "Kpop": "Kpop_mwb7e6",
+  "moon_thrifts": "moon_thrifts_brdzis",
+  "nuew_finesse": "nuew_finesse_etnk3t",
+  "PinItUp": "PinItUp_pbfl3k",
+  "prasuma": "prasuma_caft1p",
+  "Red-Bull-Logo": "Red-Bull-Logo_vgxdyj",
+  "sana": "sana_gp3oxz",
+  "SHF_health": "SHF_health_hcba7l",
+  "simplygaming": "simplygaming_fouetx",
+  "yocket": "yocket_aayjcs"
+};
+
+export const sponsors = [
+  { id: 1, name: "5paisa", key: "5paisa" },
+  { id: 2, name: "Asmi", key: "Asmi" },
+  { id: 3, name: "Cakes And Crumbs", key: "CakesAndCrumbs" },
+  { id: 4, name: "Coke Studio Bharat", key: "Coke_Studio_Bharat" },
+  { id: 5, name: "Idlish", key: "Idlish" },
+  { id: 6, name: "Kpop", key: "Kpop" },
+  { id: 7, name: "Pin It Up", key: "PinItUp" },
+  { id: 8, name: "Red Bull", key: "Red-Bull-Logo" },
+  { id: 9, name: "SHF Health", key: "SHF_health" },
+  { id: 10, name: "Calorie Minus", key: "calorie_minus" },
+  { id: 11, name: "Coca Cola", key: "coco-cola" },
+  { id: 12, name: "Food Adda", key: "food_Adda" },
+  { id: 13, name: "Green Monk", key: "greenMonk" },
+  { id: 14, name: "House of Bramhma", key: "houseOfBramhma" },
+  { id: 15, name: "Khadi India", key: "khadiIndia" },
+  { id: 16, name: "Moon Thrifts", key: "moon_thrifts" },
+  { id: 17, name: "Nuew Finesse", key: "nuew_finesse" },
+  { id: 18, name: "Prasuma", key: "prasuma" },
+  { id: 19, name: "Sana", key: "sana" },
+  { id: 20, name: "Simply Gaming", key: "simplygaming" },
+  { id: 21, name: "Yocket", key: "yocket" }
+];
