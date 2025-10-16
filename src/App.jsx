@@ -65,7 +65,7 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/events" element={<Events />} />
               <Route path="/events/:categorySlug" element={<EventCategoryPage />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </Suspense>
         </main>
