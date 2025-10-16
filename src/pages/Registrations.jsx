@@ -98,7 +98,7 @@ const RegistrationForm = (compact=false) => {
       {/* Left Image (Desktop Only) */}
     <div className="hidden xl:block xl:order-1 xl:w-[120rem] relative z-30 overflow-visible">
   <img
-  src="/src/images/trinityfest2.png"
+  src={trinityFest}
   alt="Trinity Fest"
   className="absolute right-[-25px] top-1/2 -translate-y-1/2 -translate-x-[35vh] h-[100vh] w-[120rem] object-contain drop-shadow-[0_10px_28px_rgba(0,0,0,0.6)]"
 />
@@ -251,7 +251,7 @@ const RegistrationForm = (compact=false) => {
                   </span>
                 ) : (
                   <img
-                    src="/src/images/submitbtn.png"
+                    src={submitBtn}
                     alt="Submit"
                     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[65%] h-auto object-contain pointer-events-none select-none"
                   />
