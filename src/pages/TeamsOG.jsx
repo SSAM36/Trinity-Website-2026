@@ -7,7 +7,7 @@ import {
 import { teamImagesMap } from "../data/teamImages";
 import OptimizedImage from "../components/OptimizedImage";
 
-const TeamsOG = (compact=false) => {
+const TeamsOG = (compact = false) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filter, setFilter] = useState("Top Four"); // 🔹 default to Top Four
   const containerRef = useRef(null);

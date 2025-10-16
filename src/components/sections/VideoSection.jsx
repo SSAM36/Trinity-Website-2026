@@ -2,18 +2,19 @@ import { useMemo } from "react";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import MediaCarousel from "../common/MediaCarousel";
 import PanelsSection from "./PanelsSection";
+import { shortlistedImages } from "../../data/shortlistedImages";
+import { getCloudinaryUrl } from "../../utils/cloudinary";
 // Use global background from App; no local background here
 
 const VideoSection = () => {
   const { ref, isIntersecting } = useIntersectionObserver();
 
-  // Load all shortlisted images from the specified folder and randomize order
+  // Load all shortlisted images from Cloudinary and randomize order
   const eventImages = useMemo(() => {
-    const modules = import.meta.glob(
-      "/src/images/Shortlisted pics/*.{png,jpg,jpeg,webp,JPG,JPEG,PNG,WEBP}",
-      { eager: true, import: "default" }
+    // Convert Cloudinary public IDs to full URLs - optimized sizes
+    const list = shortlistedImages.map(publicId => 
+      getCloudinaryUrl(publicId, { width: 800, quality: 65 })
     );
-    const list = Object.values(modules);
     // Shuffle
     for (let i = list.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));

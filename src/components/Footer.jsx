@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
 
         {/* Center Section: Social Icons */}
-        <div className="flex items-center space-x-4 justify-center">
+        <div className="flex items-center space-x-4 sm:ml-0 md:ml-[-80px] justify-center">
           {socialLinks.map(({ icon: Icon, link, label }, idx) => (
             <a
               key={idx}

@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
 import bg from '../images/backgroundImage.png'
 import DomeGallery from '../components/DomeGallery'
-
-const importImages = import.meta.glob(
-  '../images/Shortlisted pics/**/*.{jpg,JPG,png,PNG,jpeg,JPEG}',
-  { eager: true, import: 'default' }
-)
+import { shortlistedImages } from '../data/shortlistedImages'
+import { getCloudinaryUrl } from '../utils/cloudinary'
 
 // Shuffle function
 const shuffleArray = (array) => {
@@ -17,11 +14,14 @@ const shuffleArray = (array) => {
   return shuffled
 }
 
-// Prepare images and filter out invalid ones
+// Prepare images from Cloudinary - optimized for gallery view
 const SHORTLISTED_IMAGES = shuffleArray(
-  Object.values(importImages)
+  shortlistedImages
     .filter(Boolean) // remove undefined/null
-    .map((src) => ({ src, alt: '' }))
+    .map((publicId) => ({
+      src: getCloudinaryUrl(publicId, { width: 800, quality: 65 }),
+      alt: ''
+    }))
 )
 
 const Gallery = () => {
