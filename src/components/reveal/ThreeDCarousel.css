@@ -1,0 +1,17 @@
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+@keyframes spinRevert {
+  from { transform: rotateY(360deg); }
+  to { transform: rotateY(0deg); }
+}
+
+#drag-container {
+  touch-action: none;
+}
+
+body {
+  background: #111;
+}

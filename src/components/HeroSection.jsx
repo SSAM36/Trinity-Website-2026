@@ -21,6 +21,7 @@ const HeroSection = () => {
           className="w-64 h-auto md:w-96 lg:w-[28rem]"
         />
       </div>
+      
     </main>
   );
 };
