@@ -1,14 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ZoomScrollWrapper from "../common/ZoomScrollWrapper";
-import CountdownTimer from "../common/CountdownTimer";
+import CountdownTimer, { hasEventStarted } from "../common/CountdownTimer";
+import HorizontalCarousel from "../reveal/HorizontalCarousel";
 import mandirImage from "../../images/brighttemple.png";
 import siteBg from "../../images/coomingsoon.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function MandirComponent({ archRef, imageRef, contentRef, openingBgRef }) {
+function MandirComponent({ archRef, imageRef, contentRef, openingBgRef, onTimerComplete }) {
   return (
     <div className="relative w-full max-w-5xl mx-auto">
       {/* Main Archway */}
@@ -44,19 +45,10 @@ function MandirComponent({ archRef, imageRef, contentRef, openingBgRef }) {
                style={{ paddingTop: '35%' }}>
             <div className="text-center space-y-2">
               {/* Coming Soon Text */}
-              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-cinzel font-bold drop-shadow-2xl tracking-wide">
-                <div className="mb-1 text-amber-600" style={{ color: '#E0C98F' }}>
-                  COMING
-                </div>
-                <div className="text-red-600 drop-shadow-lg">
-                  SOON
-                </div>
-              </h1>
+             
               
               {/* Countdown Timer */}
-              <div className="mt-2">
-                <CountdownTimer showContent={true} />
-              </div>
+             
             </div>
           </div>
         </div>
@@ -72,6 +64,10 @@ const ArchwaySection = () => {
   const imageRef = useRef(null);
   const contentRef = useRef(null);
   const openingBgRef = useRef(null);
+  const carouselContainerRef = useRef(null);
+  
+  // State to track if timer has completed
+  const [timerCompleted, setTimerCompleted] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -88,29 +84,29 @@ const ArchwaySection = () => {
     gsap.set(archImage, { transformOrigin: "50% 50% 0" });
     gsap.set(openingBg, { transformOrigin: "50% 50% 0" });
 
-    // Phase 2 timeline: begins only after the temple is fully visible
+    // Main timeline: temple zoom animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "center center", // start when temple is fully revealed on screen
-        end: "+=120%",         // one extra scroll-length for the transition
+        start: "center center",
+        end: "+=200%", // Extended for temple animation
         scrub: 1,
-        pin: true,              // hold during the transition
+        pin: true,
         anticipatePin: 1,
       },
       defaults: { ease: "power2.out" },
     });
 
     tl
-      // Stretch both the mandir and the inner background together
-      .to([archImage, openingBg], { scale: 2.7, yPercent: -25 }, 0)
-      // Crossfade: bring in page background while fading the inner opening out
-      .to(bgFull, { autoAlpha: 1, scale: 1 }, 0.2)
-      .to(openingBg, { autoAlpha: 0 }, 0.2)
-      // Finally take the mandir image out of view
-      .to(archImage, { opacity: 0 }, 0.35)
-      // Ensure the existing content stays fully visible on top
-      .to(content, { opacity: 1 }, 0);
+      // Phase 1: Stretch the temple and inner background (0 - 40%)
+      .to([archImage, openingBg], { scale: 2.7, yPercent: -25, duration: 0.4 }, 0)
+      // Phase 2: Crossfade backgrounds (20% - 50%)
+      .to(bgFull, { autoAlpha: 1, scale: 1, duration: 0.3 }, 0.2)
+      .to(openingBg, { autoAlpha: 0, duration: 0.3 }, 0.2)
+      // Phase 3: Fade out temple image (35% - 60%)
+      .to(archImage, { opacity: 0, duration: 0.25 }, 0.35)
+      // Phase 4: Fade out "Coming Soon" content (50% - 70%)
+      .to(content, { autoAlpha: 0, duration: 0.2 }, 0.5);
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
@@ -119,7 +115,7 @@ const ArchwaySection = () => {
   }, []);
 
   return (
-    <main ref={sectionRef} className="relative min-h-[calc(100vh-120px)] flex items-center justify-center py-8 px-4 overflow-hidden">
+    <main ref={sectionRef} className="relative min-h-[calc(100vh-px)] flex items-center justify-center py-8 px-4 overflow-hidden">
       {/* Full-page background that appears during Phase 2 and remains */}
       <div
         ref={bgFullRef}
@@ -131,10 +127,25 @@ const ArchwaySection = () => {
         <ZoomScrollWrapper>
           <div className="relative w-full h-full flex items-center justify-center">
             <div className="w-full max-w-4xl mx-auto">
-              <MandirComponent archRef={archRef} imageRef={imageRef} contentRef={contentRef} openingBgRef={openingBgRef} />
+              <MandirComponent 
+                archRef={archRef} 
+                imageRef={imageRef} 
+                contentRef={contentRef} 
+                openingBgRef={openingBgRef}
+                onTimerComplete={() => setTimerCompleted(true)}
+              />
             </div>
           </div>
         </ZoomScrollWrapper>
+      </div>
+      
+      {/* Carousel container that appears at the end of scroll animation */}
+      <div 
+        ref={carouselContainerRef}
+        className="absolute inset-0 flex items-center justify-center pointer-events-auto"
+        style={{ opacity: 1, transition: 'opacity 0.5s' }}
+      >
+        <HorizontalCarousel />
       </div>
     </main>
   );

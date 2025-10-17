@@ -9,15 +9,13 @@ function Leaderboard(compact = false) {
   const [loading, setLoading] = useState(true);
 
   const teamDefs = [
-  //   { name: "Devadatta", color: "text-sky-200", icon: <FaStar className="text-sky-200 text-2xl sm:text-3xl md:text-4xl" /> },
-  //   { name: "Vasuki", color: "text-green-400", icon: <GiSnake className="text-green-500 text-2xl sm:text-3xl md:text-4xl" /> },
-  //   { name: "Mayura", color: "text-sky-400", icon: <FaFeatherAlt className="text-blue-400 text-2xl sm:text-3xl md:text-4xl" /> },
-  //   { name: "Airavata", color: "text-gray-200", icon: <FaHorse className="text-gray-100 text-2xl sm:text-3xl md:text-4xl" /> },
-  //   { name: "Garuda", color: "text-yellow-400", icon: <GiEagleHead className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl" /> },
-  //   { name: "Simha", color: "text-orange-500", icon: <GiLion className="text-orange-500 text-2xl sm:text-3xl md:text-4xl" /> },
-  // 
+    { name: "Devadatta", color: "text-sky-200", icon: "/3.png" },
+    { name: "Vasuki", color: "text-green-400", icon: "/6.png" },
+    { name: "Mayura", color: "text-sky-400", icon: "/5.png" },
+    { name: "Airavata", color: "text-gray-200", icon: "/4.png" },
+    { name: "Garuda", color: "text-yellow-400", icon: "/1.png" },
+    { name: "Simha", color: "text-orange-500", icon: "/2.png" },
   ];
-
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
@@ -105,7 +103,9 @@ function Leaderboard(compact = false) {
               key={idx}
               className="grid grid-cols-3 items-center bg-black/40 rounded-md py-3 px-4 sm:px-6 shadow-md"
             >
-              <div className="flex justify-start">{house.icon}</div>
+              <div className="flex justify-start">
+                <img src={house.icon} alt={house.name} className="h-8 w-8 object-contain" />
+              </div>
               <div className="text-center">
                 <span className={`text-xl sm:text-2xl md:text-3xl font-semibold font-[IM_Fell_English_SC] ${house.color}`}>
                   {house.name}
@@ -123,18 +123,7 @@ function Leaderboard(compact = false) {
       }
 
       {/* Countdown section in place of leaderboard */}
-      <div className="w-full max-w-5xl mx-auto flex flex-col items-center px-4 sm:px-6 py-8">
-        {/* Coming Soon Text - mirrored from ArchwaySection */}
-        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-cinzel font-bold drop-shadow-2xl tracking-wide text-center mb-3">
-          <div className="mb-1 text-amber-600" style={{ color: '#E0C98F' }}>
-            COMING
-          </div>
-          <div className="text-red-600 drop-shadow-lg">
-            SOON
-          </div>
-        </h1>
-        <CountdownTimer showContent={true} />
-      </div>
+     
     </div>
   );
 }

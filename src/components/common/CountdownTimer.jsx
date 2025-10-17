@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 
+// Store the start time globally so it persists
+let startTime = null;
+
 const calculateTimeLeft = () => {
-  const targetDate = new Date("2025-10-17T17:00:00+05:30");
+  // Initialize start time on first call
+  if (!startTime) {
+    startTime = Date.now();
+  }
+  
+  // 10 seconds from start time
+  const targetDate = new Date(startTime + 10 * 1000);
   const now = new Date();
   const diff = targetDate - now;
 
   if (diff <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, hasEnded: true };
   }
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -14,18 +23,33 @@ const calculateTimeLeft = () => {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  return { days, hours, minutes, seconds };
+  return { days, hours, minutes, seconds, hasEnded: false };
 };
 
-const CountdownTimer = ({ showContent }) => {
+export const hasEventStarted = () => {
+  if (!startTime) {
+    startTime = Date.now();
+  }
+  const targetDate = new Date(startTime + 10 * 1000);
+  const now = new Date();
+  return now >= targetDate;
+};
+
+const CountdownTimer = ({ showContent, onEventStart }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+      
+      // Notify parent component when event starts
+      if (newTimeLeft.hasEnded && onEventStart) {
+        onEventStart();
+      }
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [onEventStart]);
 
   return (
     <div className="text-center space-y-0.5 sm:space-y-2 md:space-y-3">
