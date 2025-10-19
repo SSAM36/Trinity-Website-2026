@@ -34,7 +34,7 @@ export const teamImagesMap = {
   marketingVCP: ["32_reygzn", "33_otfhdx", "34_suxyiy"],
   
   // Marketing HOD - images 35, 36
-  marketingHOD: ["35_jjppxj", "36_ybvom3"],
+  marketingHOD: ["35_jjppxj", "36_kusyei"],
   
   // Creatives VCP - images 1, 2
   creativesVCP: ["1_nt7gja", "2_jrvvql"],

@@ -20,7 +20,8 @@ export const sponsorImagesMap = {
   "sana": "sana_gp3oxz",
   "SHF_health": "SHF_health_hcba7l",
   "simplygaming": "simplygaming_fouetx",
-  "yocket": "yocket_aayjcs"
+  "yocket": "yocket_aayjcs",
+  "ims": "ims-logo_nydtqa"
 };
 
 export const sponsors = [
@@ -44,5 +45,6 @@ export const sponsors = [
   { id: 18, name: "Prasuma", key: "prasuma" },
   { id: 19, name: "Sana", key: "sana" },
   { id: 20, name: "Simply Gaming", key: "simplygaming" },
-  { id: 21, name: "Yocket", key: "yocket" }
+  { id: 21, name: "Yocket", key: "yocket" },
+  { id: 22, name: "IMS", key: "ims" }
 ];
