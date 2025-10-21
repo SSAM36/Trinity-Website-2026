@@ -37,18 +37,14 @@ function MandirComponent({ archRef, imageRef, contentRef, openingBgRef, onTimerC
             ref={imageRef}
             src={mandirImage} 
             alt="Majestic Archway" 
-            className="w-full h-full object-contain brightness-140"
+            className="w-full h-full object-contain brightness-140 z-100"
           />
           
           {/* Content Within the Archway */}
           <div ref={contentRef} className="absolute inset-0 flex items-center justify-center z-20" 
-               style={{ paddingTop: '35%' }}>
+               style={{ paddingTop: '20%' }}>
             <div className="text-center space-y-2">
-              {/* Coming Soon Text */}
-             
-              
-              {/* Countdown Timer */}
-             
+              <HorizontalCarousel />
             </div>
           </div>
         </div>
@@ -89,7 +85,7 @@ const ArchwaySection = () => {
       scrollTrigger: {
         trigger: section,
         start: "center center",
-        end: "+=200%", // Extended for temple animation
+        end: "+=150%", // Extended for temple animation
         scrub: 1,
         pin: true,
         anticipatePin: 1,
@@ -115,18 +111,18 @@ const ArchwaySection = () => {
   }, []);
 
   return (
-    <main ref={sectionRef} className="relative min-h-[calc(100vh-px)] flex items-center justify-center py-8 px-4 overflow-hidden">
+    <main ref={sectionRef} className="relative min-h-[calc(100vh-px)] flex items-center justify-center py-8 px-4 overflow-hidden ">
       {/* Full-page background that appears during Phase 2 and remains */}
       <div
         ref={bgFullRef}
-        className="absolute inset-0 -z-10 bg-center bg-cover"
+        className="absolute inset-0 -z-10 bg-center bg-cover "
         style={{ backgroundImage: `url(${siteBg})` }}
       />
 
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-6xl mx-auto ">
         <ZoomScrollWrapper>
           <div className="relative w-full h-full flex items-center justify-center">
-            <div className="w-full max-w-4xl mx-auto">
+            <div className="w-full max-w-4xl mx-auto ">
               <MandirComponent 
                 archRef={archRef} 
                 imageRef={imageRef} 
@@ -140,13 +136,13 @@ const ArchwaySection = () => {
       </div>
       
       {/* Carousel container that appears at the end of scroll animation */}
-      <div 
+      {/* <div 
         ref={carouselContainerRef}
-        className="absolute inset-0 flex items-center justify-center pointer-events-auto"
+        className="absolute inset-0 flex items-center justify-center pointer-events-auto "
         style={{ opacity: 1, transition: 'opacity 0.5s' }}
       >
         <HorizontalCarousel />
-      </div>
+      </div> */}
     </main>
   );
 };
