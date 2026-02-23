@@ -6,9 +6,12 @@ function AdminDashboard() {
   const FRONT_ADMIN_ID = import.meta.env.VITE_ADMIN_ID;
   const FRONT_ADMIN_PASS = import.meta.env.VITE_ADMIN_PASS;
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("adminAuthed") === "1");
-  const [adminId, setAdminId] = useState("");
+  const [adminId, setAdminId] = useState(() => sessionStorage.getItem("adminId") || "");
   const [adminPass, setAdminPass] = useState("");
   const [authError, setAuthError] = useState("");
+  const [showLogs, setShowLogs] = useState(false);
+  const [logs, setLogs] = useState([]);
+  const [loadingLogs, setLoadingLogs] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,6 +22,7 @@ function AdminDashboard() {
       FRONT_ADMIN_ID && FRONT_ADMIN_PASS && id === FRONT_ADMIN_ID && adminPass === FRONT_ADMIN_PASS
     ) {
       sessionStorage.setItem("adminAuthed", "1");
+      sessionStorage.setItem("adminId", id);
       setAuthed(true);
       setTimeout(() => window.location.reload(), 0);
       return;
@@ -33,6 +37,7 @@ function AdminDashboard() {
       const data = await res.json().catch(() => ({}));
       if (res.ok && data && data.ok) {
         sessionStorage.setItem("adminAuthed", "1");
+        sessionStorage.setItem("adminId", id);
         setAuthed(true);
         setTimeout(() => window.location.reload(), 0);
       } else {
@@ -43,13 +48,68 @@ function AdminDashboard() {
     }
   };
 
+  // ------------------ TRACKING & IDENTITY ------------------
+  const [deviceName, setDeviceName] = useState(() => localStorage.getItem("adminDeviceName") || "");
+  const [deviceId] = useState(() => {
+    let id = localStorage.getItem("adminDeviceId");
+    if (!id) {
+      id = Math.random().toString(36).substring(2, 10).toUpperCase();
+      localStorage.setItem("adminDeviceId", id);
+    }
+    return id;
+  });
+
   const handleLogout = () => {
     sessionStorage.removeItem("adminAuthed");
+    sessionStorage.removeItem("adminId");
     setAuthed(false);
     setAdminId("");
     setAdminPass("");
     // Ensure immediate transition back to login
     setTimeout(() => window.location.reload(), 0);
+  };
+
+  // ------------------ TRACKING HELPERS ------------------
+  const getPublicIP = async () => {
+    const services = [
+      "https://api.ipify.org?format=json",
+      "https://icanhazip.com",
+      "https://ifconfig.me/ip",
+      "http://checkip.amazonaws.com"
+    ];
+    for (const url of services) {
+      try {
+        const res = await fetch(url, { timeout: 3000 });
+        const text = await res.text();
+        // Handle json or plain text
+        if (text.includes("{")) {
+          return JSON.parse(text).ip;
+        }
+        return text.trim();
+      } catch (e) { }
+    }
+    return "unknown";
+  };
+
+  const getDeviceInfo = () => {
+    const ua = navigator.userAgent;
+    const nickname = deviceName ? `${deviceName} - ` : "";
+
+    let device = "Unknown Device";
+    if (/android/i.test(ua)) device = "Android";
+    else if (/iPad|iPhone|iPod/.test(ua)) device = "iOS";
+    else if (/Windows/i.test(ua)) device = "Win PC";
+    else if (/Macintosh/i.test(ua)) device = "Mac";
+    else if (/Linux/i.test(ua)) device = "Linux";
+
+    let browser = "UNK";
+    if (/chrome|crios/i.test(ua)) browser = "Chrome";
+    else if (/firefox|iceweasel/i.test(ua)) browser = "Firefox";
+    else if (/safari/i.test(ua)) browser = "Safari";
+    else if (/edge/i.test(ua)) browser = "Edge";
+
+    const res = `${window.screen.width}x${window.screen.height}`;
+    return `${nickname}${device} [ID:${deviceId}] (${browser} @ ${res})`;
   };
 
   const API_BASE = import.meta.env.VITE_API_BASE;
@@ -80,10 +140,17 @@ function AdminDashboard() {
     e.preventDefault();
     try {
       setLoadingScore(true);
+      const [ip, device] = await Promise.all([getPublicIP(), getDeviceInfo()]);
       const res = await fetch(`${API_BASE}/update-score`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: team, score: Number(score) }),
+        body: JSON.stringify({
+          name: team,
+          score: Number(score),
+          admin_id: adminId,
+          public_ip: ip,
+          user_device: device
+        }),
       });
       const text = await res.text();
       if (!res.ok) throw new Error(`HTTP ${res.status}: ${text}`);
@@ -148,7 +215,7 @@ function AdminDashboard() {
 
   // ------------------ ANNOUNCEMENTS MANAGEMENT ------------------
   const [announcements, setAnnouncements] = useState([
-    
+
   ]);
 
   const [showForm, setShowForm] = useState(false);
@@ -164,11 +231,16 @@ function AdminDashboard() {
     e.preventDefault();
     try {
       setLoadingAnnouncement(true);
+      const [ip, device] = await Promise.all([getPublicIP(), getDeviceInfo()]);
       if (editId) {
         const res = await fetch(`${API_BASE}/announcements/${editId}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, description, date, time }),
+          body: JSON.stringify({
+            title, description, date, time, admin_id: adminId,
+            public_ip: ip,
+            user_device: device
+          }),
         });
         if (!res.ok) throw new Error("Failed to update announcement");
         alert("Announcement updated successfully");
@@ -176,7 +248,11 @@ function AdminDashboard() {
         const res = await fetch(`${API_BASE}/announcements`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, description, date, time }),
+          body: JSON.stringify({
+            title, description, date, time, admin_id: adminId,
+            public_ip: ip,
+            user_device: device
+          }),
         });
         if (!res.ok) throw new Error("Failed to create announcement");
         alert("Announcement created successfully");
@@ -207,7 +283,8 @@ function AdminDashboard() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${API_BASE}/announcements/${id}`, { method: "DELETE" });
+      const [ip, device] = await Promise.all([getPublicIP(), getDeviceInfo()]);
+      const res = await fetch(`${API_BASE}/announcements/${id}?admin_id=${adminId}&public_ip=${ip}&user_device=${encodeURIComponent(device)}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete announcement");
       await fetchAnnouncements();
     } catch (err) {
@@ -216,12 +293,29 @@ function AdminDashboard() {
   };
 
   async function fetchAnnouncements() {
+    if (!API_BASE) {
+      console.error("API_BASE is not defined. Check your .env file.");
+      return;
+    }
     try {
       const res = await fetch(`${API_BASE}/announcements`);
       const data = await res.json();
       if (Array.isArray(data)) setAnnouncements(data);
     } catch (err) {
-      console.error("Error fetching announcements", err);
+      console.error(`Error fetching announcements from ${API_BASE}/announcements:`, err);
+    }
+  }
+
+  async function fetchLogs() {
+    try {
+      setLoadingLogs(true);
+      const res = await fetch(`${API_BASE}/admin/logs`);
+      const data = await res.json();
+      if (Array.isArray(data)) setLogs(data);
+    } catch (err) {
+      console.error("Error fetching logs", err);
+    } finally {
+      setLoadingLogs(false);
     }
   }
 
@@ -236,13 +330,25 @@ function AdminDashboard() {
       className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col items-center p-8 space-y-20"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="w-full max-w-5xl flex justify-end">
+      <div className="w-full max-w-5xl flex justify-between items-center">
         <button
-          onClick={handleLogout}
-          className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition"
+          onClick={() => {
+            if (!showLogs) fetchLogs();
+            setShowLogs(!showLogs);
+          }}
+          className="bg-[#dbab6a] text-black px-4 py-2 rounded-lg font-bold hover:brightness-110 transition flex items-center gap-2"
         >
-          Logout
+          {showLogs ? "Close Logs" : "📋 View Logs"}
         </button>
+        <div className="flex items-center gap-4">
+
+          <button
+            onClick={handleLogout}
+            className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
       {/* Heading */}
       <h1
@@ -251,6 +357,54 @@ function AdminDashboard() {
       >
         Admin Dashboard
       </h1>
+
+      {/* ------------------ ADMIN LOGS SECTION ------------------ */}
+      {showLogs && (
+        <section className="w-full max-w-5xl bg-black/80 backdrop-blur-xl border border-[#dbab6a]/40 rounded-2xl p-6 shadow-2xl animate-fadeIn">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-3xl text-[#dbab6a]">Maintenance Logs</h2>
+            <button
+              onClick={fetchLogs}
+              className="text-xs text-[#dbab6a] underline hover:text-white"
+              disabled={loadingLogs}
+            >
+              {loadingLogs ? "Refreshing..." : "Refresh"}
+            </button>
+          </div>
+          <div className="overflow-x-auto max-h-[400px]">
+            <table className="w-full text-left text-sm text-gray-300">
+              <thead className="sticky top-0 bg-gray-900 text-[#dbab6a] uppercase text-xs">
+                <tr>
+                  <th className="px-4 py-3">Timestamp</th>
+                  <th className="px-4 py-3">Admin</th>
+                  <th className="px-4 py-3">Public IP</th>
+                  <th className="px-4 py-3">Device (Identity)</th>
+                  <th className="px-4 py-3">Action Details</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-800">
+                {logs.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="text-center py-10 text-gray-500 italic">No logs found</td>
+                  </tr>
+                ) : (
+                  logs.map((log) => (
+                    <tr key={log.id} className="hover:bg-white/5 transition">
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        {new Date(log.created_at).toLocaleString()}
+                      </td>
+                      <td className="px-4 py-3 font-mono">{log.admin_id}</td>
+                      <td className="px-4 py-3 text-sky-400 font-mono">{log.public_ip || log.device_ip}</td>
+                      <td className="px-4 py-3 text-gray-400 text-xs italic">{log.user_device || "Unknown"}</td>
+                      <td className="px-4 py-3 text-white">{log.action_details}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       {/* ------------------ TEAM SCORES ------------------ */}
       <section className="w-full flex flex-col items-center space-y-8">

@@ -9,12 +9,12 @@ function Leaderboard(compact = false) {
   const [loading, setLoading] = useState(true);
 
   const teamDefs = [
-    { name: "Devadatta", color: "text-sky-200", icon: "/3.png" },
-    { name: "Vasuki", color: "text-green-400", icon: "/6.png" },
-    { name: "Mayura", color: "text-sky-400", icon: "/5.png" },
-    { name: "Airavata", color: "text-gray-200", icon: "/4.png" },
-    { name: "Garuda", color: "text-yellow-400", icon: "/1.png" },
-    { name: "Simha", color: "text-orange-500", icon: "/2.png" },
+    { name: "Devadatta", color: "text-sky-200", icon: "/devdutta.PNG" },
+    { name: "Vasuki", color: "text-green-400", icon: "/vasuki.PNG" },
+    { name: "Mayura", color: "text-sky-400", icon: "/mayura.PNG" },
+    { name: "Airavata", color: "text-gray-200", icon: "/airavta.PNG" },
+    { name: "Garuda", color: "text-yellow-400", icon: "/garuda.PNG" },
+    { name: "Simha", color: "text-orange-500", icon: "/simha.PNG" },
   ];
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -70,60 +70,57 @@ function Leaderboard(compact = false) {
       className="min-h-screen w-full bg-black bg-cover bg-center flex flex-col py-2 sm:py-0"
       style={{ backgroundImage: `url(${websiteBg})` }}
     >
-       {/* ===== Title Section ===== */}
-          <div
-            className={`relative flex justify-center ${
-              compact ? "my-3" : "my-6"
-            }`}
+      {/* ===== Title Section ===== */}
+      <div
+        className={`relative flex justify-center ${compact ? "my-3" : "my-6"
+          }`}
+      >
+        <div
+          className={`inline-block text-center ${compact ? "px-5 py-2" : "px-8 py-3"
+            } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
+        >
+          <h2
+            className={`${compact ? "text-[22px]" : "text-[32px]"
+              } md:text-[52px] leading-none text-[#E7B565]`}
+            style={{ fontFamily: "'Reggae One', cursive" }}
           >
-            <div
-              className={`inline-block text-center ${
-                compact ? "px-5 py-2" : "px-8 py-3"
-              } rounded-md bg-[#1A0F08] border border-[#8C6A3E] shadow-[0_10px_25px_rgba(0,0,0,0.5)]`}
-            >
-              <h2
-                className={`${
-                  compact ? "text-[22px]" : "text-[32px]"
-                } md:text-[52px] leading-none text-[#E7B565]`}
-                style={{ fontFamily: "'Reggae One', cursive" }}
-              >
-                LEADERBOARD
-              </h2>
-            </div>
-          </div>
+            LEADERBOARD
+          </h2>
+        </div>
+      </div>
 
       {/* Temporarily replacing the leaderboard standings with the countdown timer. */}
       {
-      <div className="w-full max-w-5xl mx-auto flex flex-col gap-3 px-4 sm:px-6">
-        {loading ? (
-          <p className="text-center text-gray-300 py-10">Loading...</p>
-        ) : (
-          houses.map((house, idx) => (
-            <div
-              key={idx}
-              className="grid grid-cols-3 items-center bg-black/40 rounded-md py-3 px-4 sm:px-6 shadow-md"
-            >
-              <div className="flex justify-start">
-                <img src={house.icon} alt={house.name} className="h-8 w-8 object-contain" />
+        <div className="w-full max-w-5xl mx-auto flex flex-col gap-3 px-4 sm:px-6">
+          {loading ? (
+            <p className="text-center text-gray-300 py-10">Loading...</p>
+          ) : (
+            houses.map((house, idx) => (
+              <div
+                key={idx}
+                className="grid grid-cols-3 items-center bg-black/40 rounded-md py-3 px-4 sm:px-6 shadow-md"
+              >
+                <div className="flex justify-start">
+                  <img src={house.icon} alt={house.name} className="h-24 w-24 object-contain" />
+                </div>
+                <div className="text-center">
+                  <span className={`text-xl sm:text-2xl md:text-3xl font-semibold font-[IM_Fell_English_SC] ${house.color}`}>
+                    {house.name}
+                  </span>
+                </div>
+                <div className="flex justify-end">
+                  <span className={`text-lg sm:text-xl md:text-2xl font-semibold font-[IM_Fell_English_SC] ${house.color}`}>
+                    {typeof house.score === "number" ? house.score : "NA"}
+                  </span>
+                </div>
               </div>
-              <div className="text-center">
-                <span className={`text-xl sm:text-2xl md:text-3xl font-semibold font-[IM_Fell_English_SC] ${house.color}`}>
-                  {house.name}
-                </span>
-              </div>
-              <div className="flex justify-end">
-                <span className={`text-lg sm:text-xl md:text-2xl font-semibold font-[IM_Fell_English_SC] ${house.color}`}>
-                  {typeof house.score === "number" ? house.score : "NA"}
-                </span>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
       }
 
       {/* Countdown section in place of leaderboard */}
-     
+
     </div>
   );
 }
